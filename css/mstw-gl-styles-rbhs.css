@@ -15,39 +15,39 @@
 
 /* Set the table header attributes */
 .mstw-gl-table-head thead,  .mstw-gl-table-head tr, .mstw-gl-table-head th {
-    background: #4f81bd!important;
-    color: #ffffff!important;
+    background: #000!important;
+    color: #fff!important;
 	border-spacing: 0px;
-    border: 2px solid white;  /* So the border does not appear */
+    border: 2px solid black;  /* So the border does not appear */
     padding: 2px!important;
 }
 
 /* Set the even row attributes */
 .mstw-gl-even tr,  .mstw-gl-even td {
-	color: #000000;
-	background-color: #b8cce4;
+	color: #fff;
+	background-color: #000055;
 	border-style: solid; 
-	border-color: #ffffff; 
+	border-color: #000; 
 	border-width: 2px;
 }
 
 /* Set the even links */
 .mstw-gl-even td a,  .mstw-gl-even td a:visited, .mstw-gl-even td a:active, .mstw-gl-even td a:hover {
     text-decoration: underline;
-    color: #000000;
+    color: #fff;
 }
 
 /* Set the odd row attributes */
 .mstw-gl-odd tr, .mstw-gl-odd td {
-	color: #000000;
-	background-color: #dbe5f1;
+	color: #fff;
+	background-color: #222277;
 	border-style: solid;
-	border-color: #ffffff;
+	border-color: #000;
 	border-width: 2px;
 }
 
 /* Set the odd links */
 .mstw-gl-odd td a,  .mstw-gl-odd td a:visited, .mstw-gl-odd td a:active, .mstw-gl-odd td a:hover {
     text-decoration: underline;
-    color: #000000;
+    color: #fff;
 }
