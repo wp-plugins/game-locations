@@ -11,7 +11,7 @@ Author URI:
 /*
 Game Locations (Wordpress Plugin)
 Copyright (C) 2012 Mark O'Donnell
-Contact me at http://shoalsummitsolutions.com
+Contact me at http://
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -30,6 +30,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 /* ------------------------------------------------------------------------
 // PLUGIN PREFIX:                                                          
 // 'mstw_gl_'   derived from mysportsteamwebsite game locations
+
+// 20120412 - MAO: 
+//	- Added street address to Google Maps URL in function mstw_gl_build_loc_tab()
+//		which is used by the shortcode that generates the locations table.
 // -----------------------------------------------------------------------*/
 
 ?>
@@ -455,6 +459,7 @@ function mstw_gl_build_loc_tab() {
 			
 			if ( empty( $custom_url) ) { // build the url from the address fields
 				$href = '<a href="http://maps.google.com?q=' . get_the_title( $post->ID ). "," .
+				get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
 				get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
 				get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
 				get_post_meta( $post->ID, '_mstw_gl_zip', true ) .
