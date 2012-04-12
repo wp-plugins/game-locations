@@ -4,7 +4,7 @@ Donate link:
 Tags: maps, locations, driving directions 
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 0.1
+Stable tag: 0.2
 
 Provides a table of locations with links to maps to each one.
 
@@ -47,6 +47,9 @@ Yes. The custom URL field is provided for that purpose. An entry in that field w
 3. Game Location Table.
 
 == Changelog ==
+
+= 0.2 =
+* Changed links to Google Maps in shortcode to include location street address.
 
 = 0.1 =
 * Initial release.
