@@ -1,0 +1,53 @@
+/* Game Locations [mstw_gl_game_locations] CSS Document 
+ *
+ *  This is really pretty simple. The tables have three 'row types':
+ *	the header row, even rows, and odd rows. For each, you can set:
+ *	1. Text color
+ *	2. Background color
+ *	3. Border style, width, and color
+ *	4. Link attributes - visited, hover, active, etc.
+ */
+
+.mstw-gl-table {
+    border-collapse: collapse!important;
+    border-spacing: 0px;
+}
+
+/* Set the table header attributes */
+.mstw-gl-table-head thead,  .mstw-gl-table-head tr, .mstw-gl-table-head th {
+    background: #000!important;
+    color: #fff!important;
+	border-spacing: 0px;
+    border: 2px solid black;  /* So the border does not appear */
+    padding: 2px!important;
+}
+
+/* Set the even row attributes */
+.mstw-gl-even tr,  .mstw-gl-even td {
+	color: #B8202E;
+	background-color: #ffc831;
+	border-style: solid; 
+	border-color: #000; 
+	border-width: 2px;
+}
+
+/* Set the even links */
+.mstw-gl-even td a,  .mstw-gl-even td a:visited, .mstw-gl-even td a:active, .mstw-gl-even td a:hover {
+    text-decoration: underline;
+    color: #b8202e;
+}
+
+/* Set the odd row attributes */
+.mstw-gl-odd tr, .mstw-gl-odd td {
+	color: #FFC831;
+	background-color: #B8202E;
+	border-style: solid;
+	border-color: #000;
+	border-width: 2px;
+}
+
+/* Set the odd links */
+.mstw-gl-odd td a,  .mstw-gl-odd td a:visited, .mstw-gl-odd td a:active, .mstw-gl-odd td a:hover {
+    text-decoration: underline;
+    color: #FFC831;
+}
