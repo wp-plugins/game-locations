@@ -3,7 +3,7 @@
 Plugin Name: Game Locations
 Plugin URI:
 Description: The Game Locations Plugin defines a custom type - Game Locations - for use in the MySportTeamWebite framework. Generations driving directions (from Google Maps) based on the address.
-Version: 0.2
+Version: 0.3
 Author: Mark O'Donnell
 Author URI:
 */
@@ -34,6 +34,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 // 20120412 - MAO: 
 //	- Added street address to Google Maps URL in function mstw_gl_build_loc_tab()
 //		which is used by the shortcode that generates the locations table.
+//
+// 20120414 - MAO:
+//	- Changed mstw_remove_view to mstw_gs_remove_view to avoid conflicts with other
+//		mstw plugins
+//
+// 20120504 - MAO:
+//	- Expanded maxlength of custom URL field to 120
 // -----------------------------------------------------------------------*/
 
 ?>
@@ -165,7 +172,7 @@ function mstw_gl_enqueue_styles () {
 
 // FILTERS
 // 		'manage_edit-game_locations_columns'			mstw_gl_edit_columns
-//		'post_row_actions'								mstw_remove_view
+//		'post_row_actions'								mstw_gs_remove_view
 //		
 // --------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------
@@ -249,7 +256,7 @@ function mstw_gl_create_ui( $post ) {
     </tr>
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_custom_url">Custom URL:</label></th>
-        <td><input maxlength="45" size="30" name="mstw_gl_custom_url" 
+        <td><input maxlength="100" size="30" name="mstw_gl_custom_url" 
         	value="<?php echo esc_url( $mstw_gl_custom_url ); ?>"/></td>
     </tr>
     </table>
@@ -393,11 +400,11 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 
 // --------------------------------------------------------------------------------------
 if (is_admin()) {
-	add_filter('post_row_actions','mstw_remove_view',10,2);
+	add_filter('post_row_actions','mstw_gs_remove_view',10,2);
 }			
 // --------------------------------------------------------------------------------------
 //removes view from mstw_game_locatations list
-function mstw_remove_view( $actions ) {
+function mstw_gs_remove_view( $actions ) {
 	global $post;
     if( $post->post_type == 'game_locations' ) {
 		unset( $actions['view'] );
