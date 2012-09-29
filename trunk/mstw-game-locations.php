@@ -41,6 +41,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 // 20120504 - MAO:
 //	- Expanded maxlength of custom URL field to 120
+//
+// 20120928 - MAO:
+//	- Expanded maxlength of custom URL field to 256
 // -----------------------------------------------------------------------*/
 
 ?>
@@ -159,7 +162,6 @@ function mstw_gl_enqueue_styles () {
 	//}
 }
 
-
 // --------------------------------------------------------------------------------------
 // GAME LOCATIONS CUSTOM POST TYPE STUFF
 // --------------------------------------------------------------------------------------
@@ -234,7 +236,7 @@ function mstw_gl_create_ui( $post ) {
 	?>	
 	
    <table class="form-table">
-    <tr valign="top">
+	<tr valign="top">
     	<th scope="row"><label for="mstw_gl_street" >Street Address:</label></th>
         <td><input maxlength="45" size="30" name="mstw_gl_street"
         	value="<?php echo esc_attr( $mstw_gl_street ); ?>"/></td>
@@ -256,7 +258,7 @@ function mstw_gl_create_ui( $post ) {
     </tr>
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_custom_url">Custom URL:</label></th>
-        <td><input maxlength="100" size="30" name="mstw_gl_custom_url" 
+        <td><input maxlength="256" size="30" name="mstw_gl_custom_url" 
         	value="<?php echo esc_url( $mstw_gl_custom_url ); ?>"/></td>
     </tr>
     </table>
@@ -272,7 +274,7 @@ add_action( 'save_post', 'mstw_gl_save_meta' );
 function mstw_gl_save_meta( $post_id ) {
 	//verify the metadata is set
 	if ( isset( $_POST[ 'mstw_gl_city' ] ) ) {
-		
+	
 		update_post_meta($post_id, '_mstw_gl_street',
 			strip_tags( $_POST['mstw_gl_street'] ) );
 			
@@ -326,6 +328,7 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 	/* echo 'column: ' . $column . " Post ID: " . $post_id; */
 
 	switch( $column ) {
+	
 		/* If displaying the 'street' column. */
 		case 'street' :
 
@@ -475,6 +478,7 @@ function mstw_gl_build_loc_tab() {
 			else {
 				$href = '<a href="' . $custom_url . '" target="_blank">';
 			}
+			
 			$row_string = $row_tr . $row_td . $href . get_the_title( $post->ID ) . '</a></td>';
 			
 			// column2: create the address in a pretty format

@@ -4,7 +4,7 @@ Donate link:
 Tags: maps, locations, driving directions 
 Requires at least: 3.3.1
 Tested up to: 3.3.1
-Stable tag: 0.2
+Stable tag: 0.3
 
 Provides a table of locations with links to maps to each one.
 
@@ -38,7 +38,11 @@ In this version, you have to edit the plugin's stylesheet, mstw-gl-styles.css. I
 
 = I don't really like Google Maps. Can I use other mapping service? =
 
-Yes. The custom URL field is provided for that purpose. An entry in that field will override the location's address information. The user will simply be directed to the link in the custom URL field. For example, this field can be used to provide MapQuest maps, or to spruce up Google maps to show driving directions from a particular point and the route outline on the map.  
+Yes. The custom URL field is provided for that purpose. An entry in that field will override the location's address information. The user will simply be directed to the link in the custom URL field. For example, this field can be used to provide MapQuest maps, or to spruce up Google maps to show driving directions from a particular point and the route outline on the map.
+
+= I use names for locations that sometimes aren't recognized by Google. What should I do? =
+
+Use the custom URL field, then the title will display but won't be used in the Google address.  
 
 == Screenshots ==
 
@@ -47,6 +51,9 @@ Yes. The custom URL field is provided for that purpose. An entry in that field w
 3. Game Location Table.
 
 == Changelog ==
+
+= 0.3 =
+* Increased the length of the Custom URL field to 256.
 
 = 0.2 =
 * Changed links to Google Maps in shortcode to include location street address.
