@@ -1,10 +1,12 @@
 === Game Locations ===
 Contributors: MarkODonnell
-Donate link: 
-Tags: maps, locations, driving directions 
+Donate link: http://shoalsummitsolutions.com
+Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
-Tested up to: 3.3.1
-Stable tag: 0.3
+Tested up to: 3.4.2
+Stable tag: 0.4
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Provides a table of locations with links to maps to each one.
 
@@ -22,13 +24,21 @@ Use the Edit Game Location screen (screenshot-2) to enter the Location (as the t
 
 == Installation ==
 
+The *AUTOMATED* way:
+
+1. Go to the Plugins->Installed plugins page in WordPress Admin.
+2. Click on Add New.
+3. Search for Game Locations.
+4. Click Install Now.
+5. Activate the plugin.
+6. Use the new Games menu to create and manage your schedules.
+
+The *MANUAL* way:
+
 1. Copy the entire /mstw-game-locations/ directory into your /wp-content/plugins/ directory.
-
 2. Activate the plugin.
-
 3. Enter your locations.
-
-4. Place the shortcode [mstw_gl_table] on the page(s) where you want the locations table to appear.
+4. Place the shortcode [mstw_gl_table] on the page(s) where you want the locations table to appear. (Be sure to use the editor's HTML tab, not the Visual tab.)
 
 == Frequently Asked Questions ==
 
@@ -52,6 +62,9 @@ Use the custom URL field, then the title will display but won't be used in the G
 
 == Changelog ==
 
+= 0.4 =
+* Changed the way styles are enqueued to fix a compatibility issue with WP 3.4
+
 = 0.3 =
 * Increased the length of the Custom URL field to 256.
 
@@ -60,3 +73,9 @@ Use the custom URL field, then the title will display but won't be used in the G
 
 = 0.1 =
 * Initial release.
+
+== Upgrade Notice ==
+
+The current version of Game Locations has been tested on WP 3.4.2 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
+
+Upgrading to this version of Game Locations should not impact any existing locations. (But backup your DB before you upgrade, just in case. :)

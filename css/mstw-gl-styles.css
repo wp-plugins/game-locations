@@ -6,7 +6,19 @@
  *	2. Background color
  *	3. Border style, width, and color
  *	4. Link attributes - visited, hover, active, etc.
+ *
+ *	You can also control the table borders, padding, etc here as well.
+ *
  */
+ 
+ /*------------------------------------------------------------------
+  *  CHANGE LOG
+  *
+  *	20121209-MAO: 
+  *		Added some padding rules and split out the hover rules on the even
+  *		and odd links.
+ 
+ -------------------------------------------------------------------*/
 
 .mstw-gl-table {
     border-collapse: collapse!important;
@@ -19,7 +31,7 @@
     color: #ffffff!important;
 	border-spacing: 0px;
     border: 2px solid white;  /* So the border does not appear */
-    padding: 2px!important;
+    padding: 5px!important;
 }
 
 /* Set the even row attributes */
@@ -29,12 +41,17 @@
 	border-style: solid; 
 	border-color: #ffffff; 
 	border-width: 2px;
+	padding: 5px;
 }
 
 /* Set the even links */
-.mstw-gl-even td a,  .mstw-gl-even td a:visited, .mstw-gl-even td a:active, .mstw-gl-even td a:hover {
+.mstw-gl-even td a,  .mstw-gl-even td a:visited, .mstw-gl-even td a:active {
     text-decoration: underline;
-    color: #000000;
+    color: #000;
+}
+
+.mstw-gl-even td a:hover  {
+	color: #666;
 }
 
 /* Set the odd row attributes */
@@ -44,10 +61,15 @@
 	border-style: solid;
 	border-color: #ffffff;
 	border-width: 2px;
+	padding: 5px;
 }
 
 /* Set the odd links */
-.mstw-gl-odd td a,  .mstw-gl-odd td a:visited, .mstw-gl-odd td a:active, .mstw-gl-odd td a:hover {
+.mstw-gl-odd td a,  .mstw-gl-odd td a:visited, .mstw-gl-odd td a:active {
     text-decoration: underline;
     color: #000000;
+}
+
+.mstw-gl-odd td a:hover  {
+	color: #666;
 }

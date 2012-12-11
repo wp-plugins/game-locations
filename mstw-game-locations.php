@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Game Locations
-Plugin URI:
+Plugin URI: http://wordpress.org/extend/plugins/game-locations/
 Description: The Game Locations Plugin defines a custom type - Game Locations - for use in the MySportTeamWebite framework. Generations driving directions (from Google Maps) based on the address.
-Version: 0.3
+Version: 0.4
 Author: Mark O'Donnell
-Author URI:
+Author URI: http://shoalsummitsolutions.com
 */
 
 /*
 Game Locations (Wordpress Plugin)
 Copyright (C) 2012 Mark O'Donnell
-Contact me at http://
+Contact me: mark@shoalsummitsolutions.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -137,29 +137,29 @@ function mstw_gl_add_options_page( ) {
 }
 
 /* Queue up the necessary CSS */
-add_action( 'wp_head', 'mstw_gl_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
 
 // ------------------------------------------------------------------------------
-// Callback for: add_action( 'wp_head', 'mstw_gl_enqueue_styles' );
+// Callback for: add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
 // ------------------------------------------------------------------------------
 // Loads the Cascading Style Sheet for the [mstw-gl-table] shortcode
 // ------------------------------------------------------------------------------
 function mstw_gl_enqueue_styles () {
 	
-	/* Find the full path to the css file */
-	$mstw_gl_style_url = plugins_url('/css/mstw-gl-styles.css', __FILE__);
-	$mstw_gl_style_file = WP_PLUGIN_DIR . '/mstw-game-locations/css/mstw-gl-styles.css';
+	/* Find the full path to the css file & register the style */
+	$mstw_gl_style_url = plugins_url( '/css/mstw-gl-styles.css', __FILE__ );
+	
+	wp_register_style( 'mstw_gl_style', $mstw_gl_style_url );
+	
+	//$mstw_gl_style_file = WP_PLUGIN_DIR . '/mstw-game-locations/css/mstw-gl-styles.css';
+	
 	
 	/* If cssfile exists, register & enqueue the style */
+	$mstw_gl_style_file = dirname( __FILE__ ) . '/css/mstw-gl-styles.css';
 	
 	if ( file_exists( $mstw_gl_style_file ) ) {
-		
-		//echo 'CSS File ' . $mstw_gl_style_file . ' Exists' . '<br/>';
-		wp_enqueue_style( 'mstw_gl_style', $mstw_gl_style_url );	
-		
+		wp_enqueue_style( 'mstw_gl_style' );	
 	}
-
-	//}
 }
 
 // --------------------------------------------------------------------------------------
