@@ -3,7 +3,7 @@
 Plugin Name: Game Locations
 Plugin URI: http://wordpress.org/extend/plugins/game-locations/
 Description: The Game Locations Plugin defines a custom type - Game Locations - for use in the MySportTeamWebite framework. Generations driving directions (from Google Maps) based on the address.
-Version: 0.4
+Version: 1.1
 Author: Mark O'Donnell
 Author URI: http://shoalsummitsolutions.com
 */
