@@ -17,12 +17,19 @@
   *	20121209-MAO: 
   *		Added some padding rules and split out the hover rules on the even
   *		and odd links.
- 
+  *
+  *	20130120-MAO: 
+  *		Added vertical alignment for tables and (new) map images.
+  *
  -------------------------------------------------------------------*/
 
 .mstw-gl-table {
     border-collapse: collapse!important;
     border-spacing: 0px;
+}
+
+.mstw-gl-table td, .mstw-gl-table td img {
+	vertical-align: middle;
 }
 
 /* Set the table header attributes */

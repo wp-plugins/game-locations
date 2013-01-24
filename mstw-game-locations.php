@@ -44,6 +44,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 // 20120928 - MAO:
 //	- Expanded maxlength of custom URL field to 256
+//
+// 20130121 - MAO:
+//	- Added a new table column with small map graphics from google maps. Looks nicer but
+//		no real change to the basic functionality.
+//	- Added an admin settings section to support the new map graphics.
+//	- Updated the code to support Internationalization. (Missing and incorrect wrappers.)
+//
 // -----------------------------------------------------------------------*/
 
 ?>
@@ -66,74 +73,6 @@ function mstw_gl_requires_wp_ver() {
 				Please upgrade WordPress and try again.<br /><br />Back to <a href='".admin_url()."'>WordPress admin</a>." );
 		}
 	}
-}
-
-// --------------------------------------------------------------------------------------
-// Set-up Action and Filter Hooks for the Settings on the admin side
-// --------------------------------------------------------------------------------------
-register_activation_hook(__FILE__, 'mstw_gl_set_defaults');
-register_uninstall_hook(__FILE__, 'mstw_gl_delete_plugin_options');
-add_action('admin_init', 'mstw_gl_register_settings' );
-// add_action('admin_menu', 'mstw_gl_add_options_page'); Code is still in place
-//add_filter( 'plugin_action_links', 'mstw_plugin_action_links', 10, 2 );
-
-// --------------------------------------------------------------------------------------
-// Callback for: register_uninstall_hook(__FILE__, 'mstw_gl_delete_plugin_options')
-// --------------------------------------------------------------------------------------
-// It runs when the user deactivates AND DELETES the plugin. 
-// It deletes the plugin options DB entry, which is an array storing all the plugin options
-// --------------------------------------------------------------------------------------
-function mstw_gl_delete_plugin_options() {
-	delete_option('mstw_gl_options');
-}
-
-// --------------------------------------------------------------------------------------
-// Callback for: register_activation_hook(__FILE__, 'mstw_gl_set_defaults')
-// --------------------------------------------------------------------------------------
-// This function runs when the plugin is activated. If there are no options currently set, 
-// or the user has selected the checkbox to reset the options to their defaults,
-// then the options are set/reset. Otherwise the options remain unchanged.
-// --------------------------------------------------------------------------------------
-function mstw_gl_set_defaults() {
-	$tmp = get_option('mstw_gl_options');
-    if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
-		delete_option('mstw_gl_options'); // so we don't have to reset all the 'off' checkboxes too! 
-		$arr = array(	"mstw_gl_hdr_bkgd" => "#000000",
-						"mstw_gl_hdr_text" => "#FFFFFF",
-						"mstw_gl_even_bkgd" => "#DBE5F1",
-						"mstw_gl_even_text" => "#000000",
-						"mstw_gl_odd_bkgd" => "#FFFFFF",
-						"mstw_gl_odd_text" => "#000000",
-						"mstw_gl_brdr_width" => "2",  //px
-						"mstw_gl_brdr_color" => "#F481BD",
-						"mstw_gl_default_opts" => "",
-		);
-		update_option('mstw_gl_options', $arr);
-	}
-}
-
-// --------------------------------------------------------------------------------------
-// Callback for: add_action('admin_init', 'mstw_gl_register_settings' )
-// --------------------------------------------------------------------------------------
-// Registers plugin settings with the WP Setting API. Nothing works unless this happens.
-// --------------------------------------------------------------------------------------
-function mstw_gl_register_settings( ) { //whitelist options
-	register_setting( 'mstw_gl_options_group', 'mstw_gl_options', 'mstw_gl_valid_options' );
-	add_settings_section( 'mstw_gl_main_section', 'Game Locations Table Style', 'mstw_gl_main_section_text', 
-							basename(__FILE__) );
-	add_settings_field( 'mstw_gl_hdr_bkgd', 'Header Background Color', 'mstw_gl_hdr_bkgd_cb', 
-						basename(__FILE__), 'mstw_gl_main_section');
-
-}
-
-// ------------------------------------------------------------------------------
-// Callback for: add_action('admin_menu', 'mstw_gl_add_options_page');
-// ------------------------------------------------------------------------------
-// Adds a new Settings Page into the plugin menu.
-// ------------------------------------------------------------------------------
-function mstw_gl_add_options_page( ) { 
-	add_submenu_page('edit.php?post_type=game_locations', 'Game Locations Settings', 'Settings',
-					 'edit_posts', basename(__FILE__), 'mstw_gl_render_settings_ui');
 }
 
 /* Queue up the necessary CSS */
@@ -306,12 +245,12 @@ function mstw_gl_edit_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Location' ),
-		'street' => __( 'Street' ),
-		'city' => __( 'City' ),
-		'state' => __( 'State' ),
-		'zip' => __( 'Zip' ),
-		'custom_url' => __( 'Custom URL' )
+		'title' => __( 'Location', 'mstw-loc-domain' ),
+		'street' => __( 'Street', 'mstw-loc-domain' ),
+		'city' => __( 'City', 'mstw-loc-domain' ),
+		'state' => __( 'State', 'mstw-loc-domain' ),
+		'zip' => __( 'Zip', 'mstw-loc-domain' ),
+		'custom_url' => __( 'Custom URL', 'mstw-loc-domain' )
 	);
 
 	return $columns;
@@ -336,9 +275,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 			$mstw_gl_street = get_post_meta( $post_id, '_mstw_gl_street', true );
 
 			if ( empty( $mstw_gl_street ) )
-				echo __( 'No Street Address' );
+				echo __( 'No Street Address', 'mstw-loc-domain' );
 			else
-				printf( __( '%s' ), $mstw_gl_street );
+				printf( '%s', $mstw_gl_street );
 
 			break;
 
@@ -349,9 +288,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 			$mstw_gl_city = get_post_meta( $post_id, '_mstw_gl_city', true );
 
 			if ( empty( $mstw_gl_city ) )
-				echo __( 'No City' );
+				echo __( 'No City', 'mstw-loc-domain' );
 			else
-				printf( __( '%s' ), $mstw_gl_city );
+				printf( '%s', $mstw_gl_city );
 
 			break;
 			
@@ -363,9 +302,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 
 
 			if ( empty( $mstw_gl_state ) )
-				echo __( 'No State' );
+				echo __( 'No State', 'mstw-loc-domain' );
 			else
-				printf( __( '%s' ), $mstw_gl_state );
+				printf( '%s', $mstw_gl_state );
 
 			break;	
 			
@@ -376,9 +315,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 			$mstw_gl_zip = get_post_meta( $post_id, '_mstw_gl_zip', true );
 
 			if ( empty( $mstw_gl_zip ) )
-				echo __( 'No Zip' );
+				echo __( 'No Zip', 'mstw-loc-domain' );
 			else
-				printf( __( '%s' ), $mstw_gl_zip );
+				printf( '%s', $mstw_gl_zip );
 
 			break;	
 			
@@ -389,9 +328,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 			$mstw_gl_custom_url = get_post_meta( $post_id, '_mstw_gl_custom_url', true );
 
 			if ( empty( $mstw_gl_custom_url ) )
-				echo __( 'No URL, use address.' );
+				echo __( 'No URL, use address.', 'mstw-loc-domain' );
 			else
-				printf( __( '%s' ), $mstw_gl_custom_url );
+				printf( '%s', $mstw_gl_custom_url );
 
 			break;			
 			
@@ -434,6 +373,13 @@ function mstw_gl_shortcode_handler(){
 // Loops through the Game Locations Custom posts and formats them into a pretty table.
 // --------------------------------------------------------------------------------------
 function mstw_gl_build_loc_tab() {
+	// Get the settings/options
+	$options = get_option( 'mstw_gl_options' );
+	$gl_instructions = $options['gl_instructions'];
+	$gl_map_width = $options['gl_map_width'];
+	$gl_map_height = $options['gl_map_heigth'];
+	$gl_marker_color = $options['gl_marker_color'];;
+
 	// Get the game_location posts
 	$posts = get_posts(array( 'numberposts' => -1,
 							  'post_type' => 'game_locations',
@@ -443,13 +389,19 @@ function mstw_gl_build_loc_tab() {
 	
     if($posts) {
 		// Make table of posts
-		// Start with the table header
-        $output = '<p>Click on location to view driving directions. </p>
-        <table class="mstw-gl-table">
-        <thead class="mstw-gl-table-head"><tr>
-			<th>Location</th>
-            <th>Address</th>
-		</tr></thead>';
+		// Start with some instructions at the top
+		if ( $gl_instructions == '' ) {
+			$gl_instructions = __( 'Click on map to view driving directions.', 'mstw-loc-domain' );
+		}
+        $output = '<p>' . $gl_instructions . '</p>';
+		
+		// Now build the table's header
+        $output .= '<table class="mstw-gl-table">';
+        $output .= '<thead class="mstw-gl-table-head"><tr>';
+		$output .= '<th>' . __( 'Location', 'mstw-loc-domain' ) . '</th>';
+        $output .= '<th>' . __( 'Address', 'mstw-loc-domain' ) . '</th>';
+		$output .= '<th>' . __( 'Map', 'mstw-loc-domain' ) . ' (' . __( 'Click for larger view', 'mstw-loc-domain' ) . ')</th>';
+		$output .= '</tr></thead>';
 		
 		// Loop through the posts and make the rows
 		$even_and_odd = array('even', 'odd');
@@ -464,28 +416,53 @@ function mstw_gl_build_loc_tab() {
 			
 			// create the row
 			
-			// column1: create the link for the location name to the map
-			$custom_url = trim( get_post_meta( $post->ID, '_mstw_gl_custom_url', true) );
-			
-			if ( empty( $custom_url) ) { // build the url from the address fields
-				$href = '<a href="http://maps.google.com?q=' . get_the_title( $post->ID ). "," .
-				get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
-				get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
-				get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
-				get_post_meta( $post->ID, '_mstw_gl_zip', true ) .
-				'" target="_blank">';
-			}
-			else {
-				$href = '<a href="' . $custom_url . '" target="_blank">';
-			}
-			
-			$row_string = $row_tr . $row_td . $href . get_the_title( $post->ID ) . '</a></td>';
+			// column1: location name to the map
+			$row_string = $row_tr . $row_td . get_the_title( $post->ID ) . '</td>';
 			
 			// column2: create the address in a pretty format
 			$row_string = $row_string . $row_td . get_post_meta( $post->ID, '_mstw_gl_street', true ) . '<br/>' . 
 				get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
 				get_post_meta( $post->ID, '_mstw_gl_state', true ) . '  ' . 
 				get_post_meta( $post->ID, '_mstw_gl_zip', true ) . '</td>';
+				
+			// column3: map image and link to map
+			
+			// look for a custom url, if none, build one
+			$custom_url = trim( get_post_meta( $post->ID, '_mstw_gl_custom_url', true) );
+			
+			if ( empty( $custom_url ) ) {  // build the url from the address fields
+				$center_string = get_the_title( $post->ID ). "," .
+					get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
+					get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
+					get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
+					get_post_meta( $post->ID, '_mstw_gl_zip', true );
+					
+				$href = '<a href="https://maps.google.com?q=' .$center_string . '" target="_blank" >';
+				
+				if ( $gl_map_width == "" ) {
+					$gl_map_width = 250;
+				}
+				if ( $gl_map_heigth == "" ) {
+					$gl_map_height = 75;
+				}
+				if ( $gl_marker_color == "" ) {
+					$gl_marker_color = 'blue';
+				}
+				
+				$row_string .= $row_td . $href . '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' . $center_string . 
+					'&markers=size:mid%7Ccolor:' . $gl_marker_color . '%7C' . $center_string . 
+					'&zoom=15&size=' . $gl_map_width . 'x' . $gl_map_height . '&maptype=roadmap&sensor=false" />' . '</a></td>';
+			
+			}
+			else {  // use the custom url
+				$href = '<a href="' . $custom_url . '" target="_blank">';
+				
+				$row_string .= $row_td . $href . __( 'Custom Map', 'mstw-loc-domain' ) . '</a></td>';
+			}
+			
+			//$row_string = $row_tr . $row_td . $href . get_the_title( $post->ID ) . '</a></td>';
+			
+			
 			
 			$output = $output . $row_string;
 			
@@ -501,154 +478,214 @@ function mstw_gl_build_loc_tab() {
 }
 
 /****************************************************************/
-
-
- 
+// ADMIN PAGE SETTINGS
 /****************************************************************/
 
+// --------------------------------------------------------------------------------------
+// Add a menu for our option page
+add_action('admin_menu', 'mstw_gl_add_page');
 
-function mstw_gl_settings_ui_should_work( ) { 
-?>
+function mstw_gl_add_page() {
+	//The next line adds the settings page to the Settings menu
+	//add_options_page( 'Game Locations Settings', 'Game Locations', 'manage_options', 'mstw_gl_settings', 'mstw_gl_option_page' );
+	
+	// But I decided to add the settings page to the Locations menu
+	$page = add_submenu_page( 	'edit.php?post_type=game_locations', 
+						'Game Locations Settings', 
+						'Settings', 
+						'manage_options', 
+						'mstw_gl_settings', 
+						'mstw_gl_option_page' );
+}
+
+// --------------------------------------------------------------------------------------
+// Render the option page
+function mstw_gl_option_page() {
+	?>
 	<div class="wrap">
-    <div class="icon32" id="icon-options-general"><br/></div>
-	<h2>Game Locations Settings</h2>
-	<p>Coming Soon! Settings to modify the look and feel of the locations table. </p>
-    
-    <form method="post" action="options.php"> 
-    	<?php settings_fields( 'mstw_gl_options_group' ); ?>
-        
-        <?php do_settings_sections( 'mstw-gl-options' ); ?>
-        
-    	<p class="submit">
-		<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-		</p>
-	</form>
-    
-    <p>End of the Game Locations Settings form. </p>
-    
-    </div> <!-- div class='wrap' -->
-<?php
-}
-
-function mstw_gl_main_section_text() {
-	echo '<p>Enter all colors in standard, six digit, hex format; e.g., #1A2BC3</p>';
-}
-
-function mstw_gl_hdr_bkgd_cb() {
-	$mstw_gl_options = get_option('mstw_gl_options'); ?>
-	<input type="text" size="8" name="mstw_gl_options[mstw_gl_hdr_bkgd]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_hdr_bkgd];?>" />
-<?php
-}
-
-function mstw_gl_hdr_text_cb() {
-	$mstw_gl_options = get_option('mstw_gl_options');
-	echo "<input id='mstw_gl_hdr_text_color' name='mstw_gl_options[text_string]' size='40' type='text' 
-				value='{$options['text_string']}' />";
-}
-
-function mstw_gl_render_settings_ui() {
-?>
-	<div class="wrap">
-		
-		<!-- Display Plugin Icon, Header, and Description -->
-		<div class="icon32" id="icon-options-general"><br></div>
-		<h2>Game Location Settings</h2>
-		<p>Enter all colors in standard, six digit, hex format; e.g., #1A2BC3</p>
-
-		<!-- Beginning of the Plugin Options Form -->
-		<form method="post" action="options.php">
-			<?php settings_fields('mstw_gl_options_group'); ?>
-			<?php $mstw_gl_options = get_option('mstw_gl_options'); ?>
-
-			<!-- Table Structure Containing Form Controls -->
-			<!-- Each Plugin Option Defined on a New Table Row -->
-			<table class="form-table">
-
-				<tr>
-					<th scope="row">Header Background Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_hdr_bkgd]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_hdr_bkgd];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Header Text Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_hdr_text]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_hdr_text];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Even Row Background Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_even_bkgd]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_even_bkgd];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Even Row Text Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_even_text]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_even_text];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Odd Row Background Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_odd_bkgd]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_odd_bkgd];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Odd Row Text Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_odd_text]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_odd_text];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Border Color</th>
-					<td>
-						<input type="text" size="8" name="mstw_gl_options[mstw_gl_brdr_color]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_brdr_color];?>" />
-					</td>
-				</tr>
-                <tr>
-					<th scope="row">Border Width</th>
-					<td>
-						<label><input type="text" size="3" name="mstw_gl_options[mstw_gl_brdr_width]" 
-                        		value="<?php echo $mstw_gl_options[mstw_gl_brdr_width];?>" /> (measured in pixels)</label>
-					</td>
-				</tr>
-                
-                
-				<tr valign="top" style="border-top:#dddddd 1px solid;">
-					<th scope="row">Database Options</th>
-					<td>
-						<label><input name="mstw_gl_options[mstw_gl_default_opts]" type="checkbox" value="1" 
-						<?php if (isset($mstw_gl_options['mstw_gl_default_opts'])) {
-									checked('1', $mstw_gl_options['mstw_gl_default_opts']); 
-								} ?> /> Restore defaults upon plugin deactivation/reactivation</label>
-						<br/><span style="color:#666666;margin-left:2px;">
-                        Only check this if you want to reset plugin settings upon Plugin reactivation
-                        </span>
-					</td>
-				</tr>
-			</table>
-			<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-			</p>
+		<?php screen_icon(); ?>
+		<h2>Game Locations Plugin Settings</h2>
+		<?php //settings_errors(); ?>
+		<form action="options.php" method="post">
+			<?php settings_fields('mstw_gl_options'); ?>
+			<?php do_settings_sections('mstw_gl_settings'); ?>
+			<input name="Submit" type="submit" class="button-primary" value="Save Changes" />
 		</form>
-
 	</div>
-<?php	
+	<?php
 }
 
-// Sanitize and validate input. Accepts an array, return a sanitized array.
-function mstw_gl_valid_options($input) {
-	 // strip html from textboxes
-	$input['mstw_gl_hdr_bkgd'] =  wp_filter_nohtml_kses($input['mstw_gl_hdr_bkgd']); // Sanitize textarea input (strip html tags, and escape characters)
-	$input['mstw_gl_hdr_text'] =  wp_filter_nohtml_kses($input['mstw_gl_hdr_text']); // Sanitize textbox input (strip html tags, and escape characters)
-	return $input;
+// --------------------------------------------------------------------------------------
+// Register and define the settings
+add_action('admin_init', 'mstw_gl_admin_init');
+function mstw_gl_admin_init(){
+	register_setting(
+		'mstw_gl_options',
+		'mstw_gl_options',
+		'mstw_gl_validate_options'
+	);
+	
+	// First (& only?) Section
+	add_settings_section(
+		'mstw_gl_main_settings',
+		'Game Locations Settings',
+		'mstw_gl_main_settings_text',
+		'mstw_gl_settings'
+	);
+	
+	// Instructions above locations table
+	add_settings_field(
+		'mstw_gl_instructions',
+		'Locations Table Instructions (defaults to "Click on map to view driving directions."):',
+		'mstw_gl_instructions_input',
+		'mstw_gl_settings',
+		'mstw_gl_main_settings'
+	);
+	
+	// Color for location marker on map
+	add_settings_field(
+		'mstw_gl_marker_color',
+		'Map marker color (hex):',
+		'mstw_gl_marker_color_input',
+		'mstw_gl_settings',
+		'mstw_gl_main_settings'
+	);
+	
+	// Width of map icon in location table
+	add_settings_field(
+		'mstw_gl_map_width',
+		'Map icon (in table) width (pixels):',
+		'mstw_gl_map_width_input',
+		'mstw_gl_settings',
+		'mstw_gl_main_settings'
+	);
+	
+	// Height of map icon in location table
+	add_settings_field(
+		'mstw_gl_map_height',
+		'Map icon (in table) height (pixels):',
+		'mstw_gl_map_height_input',
+		'mstw_gl_settings',
+		'mstw_gl_main_settings'
+	);
 }
+
+// Main settings section instructions
+function mstw_gl_main_settings_text( ) {
+	echo '<p>' . __( 'Enter your game locations table settings. ', 'mstw-loc-domain' ) . '<br/>' . __( 'All color values are in hex, in the format 0x followed by six hex digits. For example, 0x123abd.', 'mstw-loc-domain' ) .  '</p>';
+}
+
+/*--------------------------------------------------------------
+ *	Input fields for the main section
+ */
+ 
+ function mstw_gl_instructions_input( ) {
+	// get option 'gl_instructions' value from the database
+	$options = get_option( 'mstw_gl_options' );
+	$gl_instructions = $options['gl_instructions'];
+	// echo the field
+	echo "<input id='gl_instructions' name='mstw_gl_options[gl_instructions]' type='text' size='50' value='$gl_instructions' />";
+}
+ 
+function mstw_gl_marker_color_input( ) {
+	// get option 'gl_marker_color' value from the database
+	$options = get_option( 'mstw_gl_options' );
+	$gl_marker_color = $options['gl_marker_color'];
+	// echo the field
+	echo "<input id='gl_marker_color' name='mstw_gl_options[gl_marker_color]' type='text' value='$gl_marker_color' />";
+}
+
+function mstw_gl_map_width_input() {
+	// get option 'gl_map_width' value from the database
+	$options = get_option( 'mstw_gl_options' );
+	$gl_map_width = $options['gl_map_width'];
+	// echo the field
+	echo "<input id='gl_map_width' name='mstw_gl_options[gl_map_width]' type='text' value='$gl_map_width' />";
+}
+
+function mstw_gl_map_height_input() {
+	// get option 'gl_map_height' value from the database
+	$options = get_option( 'mstw_gl_options' );
+	$gl_map_height = $options['gl_map_height'];
+	// echo the field
+	echo "<input id='gl_map_height' name='mstw_gl_options[gl_map_height]' type='text' value='$gl_map_height' />";
+}
+
+/*--------------------------------------------------------------
+ *	Validate user input (we want text only)
+ */
+ 
+function mstw_gl_validate_options( $input ) {
+	// Create our array for storing the validated options
+	$output = array();
+	// Pull the previous (good) options
+	$options = get_option( 'mstw_gl_options' );
+	// Loop through each of the incoming options
+	foreach( $input as $key => $value ) {
+		// Check to see if the current option has a value. If so, process it.
+		if( isset( $input[$key] ) ) {
+			switch ( $key ) {
+				// add the hex colors
+				case 'gl_marker_color':
+					// validate the color for proper hex format
+					$sanitized_color = mstw_gl_sanitize_hex_color( $input[$key] );
+					
+					// decide what to do - save new setting 
+					// or display error & revert to last setting
+					if ( isset( $sanitized_color ) ) {
+						// blank input is valid
+						$output[$key] = $sanitized_color;
+					}
+					else  {
+						// there's an error. Reset to the last stored value
+						$output[$key] = $options[$key];
+						// add error message
+						add_settings_error( 'mstw_' . $key,
+											'mstw_gl_hex_color_error',
+											'Invalid hex color entered!',
+											'error');
+					}
+					break;
+				case 'gl_width':
+				case 'gl_height':
+					$output[$key] = intval( $input[$key] );
+					break;	
+				// Check all other settings
+				default:
+					//case 'gl_instructions':
+					//case 'gl_width':
+					//case 'gl_height':
+					$output[$key] = sanitize_text_field( $input[$key] );
+					// There should not be user/accidental errors in these fields
+					break;
+				
+			} // end switch
+		} // end if
+	} // end foreach
+	
+	// Return the array processing any additional functions filtered by this action
+	
+	return apply_filters( 'mstw_gl_validate_filters', $output, $input );
+}
+
+function mstw_gl_sanitize_hex_color( $color ) {
+	// Check $color for proper hex color format (3 or 6 digits) or the empty string.
+	// Returns corrected string if valid hex color, returns null otherwise
+	
+	if ( '' === $color )
+		return '';
+
+	// 3 or 6 hex digits, or the empty string.
+	if ( preg_match('|^0x([A-Fa-f0-9]{6})$|', $color ) /*preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color )*/ )
+		return $color;
+
+	return null;
+}
+
+/*--------------------------------------------------------------
+ *	Display the admin notices
+ */
+function mstw_gl_admin_notices( ) {
+    settings_errors( );
+}
+add_action( 'admin_notices', 'mstw_gl_admin_notices' );

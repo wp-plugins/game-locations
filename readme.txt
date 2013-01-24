@@ -3,22 +3,24 @@ Contributors: MarkODonnell
 Donate link: http://shoalsummitsolutions.com
 Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
-Tested up to: 3.4.2
-Stable tag: 0.4
+Tested up to: 3.5
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides a table of locations with links to maps to each one.
+Provides a table of locations with automatic links to a Google map for each one. Custom links can also be created.
 
 == Description ==
 
-This is a simple plugin to create a list (table) of locations with links to maps to each one. It creates a custom post type, game_locations, installs an editor for this post type, and provides a shortcode, [mstw_gl_table], to display the custom posts.
+This is a simple plugin to create a list (table) of locations (screenshot-4) with links to maps to each one. It creates a custom post type, game_locations, installs an editor for this post type, and provides a shortcode, [mstw_gl_table], to display the custom posts.
 
 Use the Edit Game Location screen (screenshot-2) to enter the Location (as the title), the street address, city, state, and zip. The plug-in builds the link to that location on Google Maps for display through the Game Locations table. The Custom URL field is normally not needed and therefore left blank. (See FAQ #2.)
 
 **Notes:**
 
 * The references are to "game locations", only because that was original purpose of the plugin. However, it works for any type of location - schools, churches, businesses, whatever.
+
+* In version 1.1, the table was changed to provide a third column with a "thumbnail" icon of the map (for default Google Maps) and a link from it to the map URL. This is (hopefully) graphically more appealing, but the core functionality is really unchanged. A Settings page was added to the Admin Dashboard to support a few styling options (screenshot-4), particularly for the mail thumbnail in the table, but most styling must be done in the plugin's stylesheet.
 
 * The Game Locations plugin is the first in a set of nine plugins supporting a framework for sports team websites. Others will include Game Schedules, Team Rosters, Coaching Staffs, Sponsors, plus more.
 
@@ -44,7 +46,7 @@ The *MANUAL* way:
 
 = How do I change the look of the locations table? =
 
-In this version, you have to edit the plugin's stylesheet, mstw-gl-styles.css. It is located in game-locations/css. It is short, simple, and well documented. In the near future, I plan to provide options on the admin page to control the table's colors, link syles, etc.
+In this version, you have to edit the plugin's stylesheet, mstw-gl-styles.css. It is located in game-locations/css. It is short, simple, and well documented. A Settings screen has been added to version 1.1 to control a few elements, especially the map thumbnails in the table. (See the Other Notes section.)
 
 = I don't really like Google Maps. Can I use other mapping service? =
 
@@ -54,13 +56,36 @@ Yes. The custom URL field is provided for that purpose. An entry in that field w
 
 Use the custom URL field, then the title will display but won't be used in the Google address.  
 
+= Is this plugin ready for translation? =
+
+Yes. As of version 1.1. Contact me if you would like help creating a translation in your language.
+
 == Screenshots ==
 
-1. All Game Locations.
-2. Edit Game Location.
-3. Game Location Table.
+1. All Game Locations
+2. Edit Game Location
+3. Game Location Table
+4. The Settings Screen
+
+== Other Notes ==
+
+The Settings screen on the Admin Dashboard is new in Version 1.1. The settings below provide some control of the Game Locations table and the map icons displayed therein, including:
+
+* Locations Table Instructions. The instructions that appear at the top of the Game Locations table. Defaults to "Click on map to view driving directions."
+
+* Map marker color. You can select any color for the map marker indicating the location. You must enter a hex value in the format "0xABC123". (Don't ask me why Google Maps doesn't use "#ABC123". Guess I could have translated but hey, just do it!) Note that all six hex charaters are required. The default marker color is blue.
+
+* Map icon width: The width of the map icon in the table in pixels. Google's API limits the value to 640, which would be far too big for the table anyway.
+
+* Map icon height: The height of the map icon in the table in pixels. Google's API limits the value to 640, which would be far too big for the table anyway.
+
 
 == Changelog ==
+
+= 1.1 =
+* The plugin was "internationalized". It is now ready for translation and the default .po and .mo files are in the /lang directory.
+* The Game Locations table was enhanced to add map icons for each location.
+* A settings screen was added to support the changes to the table. (See the Other Notes section.)
 
 = 0.4 =
 * Changed the way styles are enqueued to fix a compatibility issue with WP 3.4
@@ -76,6 +101,6 @@ Use the custom URL field, then the title will display but won't be used in the G
 
 == Upgrade Notice ==
 
-The current version of Game Locations has been tested on WP 3.4.2 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
+The current version of Game Locations has been tested on WP 3.5 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
 Upgrading to this version of Game Locations should not impact any existing locations. (But backup your DB before you upgrade, just in case. :)
