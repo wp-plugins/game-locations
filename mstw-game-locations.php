@@ -132,20 +132,21 @@ function mstw_gl_register_post_type() {
             'title'
         ),
         'labels' => array(
-            'name' => 'Game Locations',
-            'singular_name' => 'Game Location',
-            'add_new' => 'Add New Location',
-            'add_new_item' => 'Add Game Location',
-            'edit_item' => 'Edit Game Location',
-            'new_item' => 'New Game Location',
+            'name' => __( 'MSTW Game Locations', 'mstw-loc-domain' ),
+            'singular_name' => __( 'Game Location', 'mstw-loc-domain' ),
+			'all_items' => __( 'All Locations', 'mstw-loc-domain' ),
+            'add_new' => __( 'Add New Location', 'mstw-loc-domain' ),
+            'add_new_item' => __( 'Add Location', 'mstw-loc-domain' ),
+            'edit_item' => __( 'Edit Location', 'mstw-loc-domain' ),
+            'new_item' => __( 'New Location', 'mstw-loc-domain' ),
 			//'View Game Location' needs a custom page template that is of no value.
 			'view_item' => null, 
-            'search_items' => 'Search Game Locations',
-            'not_found' => 'No Game Locations Found',
-            'not_found_in_trash' => 'No Game Locations Found In Trash'
+            'search_items' => __( 'Search Game Locations', 'mstw-loc-domain' ),
+            'not_found' => __( 'No Locations Found', 'mstw-loc-domain' ),
+            'not_found_in_trash' => __( 'No Locations Found In Trash', 'mstw-loc-domain' ),
         	)
 		);
-		
+	
 	register_post_type( 'game_locations', $args);
 }
 
@@ -172,33 +173,43 @@ function mstw_gl_create_ui( $post ) {
 	$mstw_gl_state = get_post_meta($post->ID, '_mstw_gl_state', true );
 	$mstw_gl_zip = get_post_meta($post->ID, '_mstw_gl_zip', true );
 	$mstw_gl_custom_url = get_post_meta($post->ID, '_mstw_gl_custom_url', true );  
+	$mstw_gl_venue_url = get_post_meta($post->ID, '_mstw_gl_venue_url', true ); 
 	?>	
 	
    <table class="form-table">
 	<tr valign="top">
-    	<th scope="row"><label for="mstw_gl_street" >Street Address:</label></th>
-        <td><input maxlength="45" size="30" name="mstw_gl_street"
+    	<th scope="row"><label for="mstw_gl_street" ><?php _e( 'Street Address:', 'mstw-loc-domain' ); ?></label></th>
+        <td><input maxlength="128" size="30" name="mstw_gl_street"
         	value="<?php echo esc_attr( $mstw_gl_street ); ?>"/></td>
     </tr>
     <tr valign="top">
-    	<th scope="row"><label for="$mstw_gl_city">City:</label></th>
-        <td><input maxlength="45" size="30" name="mstw_gl_city" 
+    	<th scope="row"><label for="$mstw_gl_city"><?php _e( 'City:', 'mstw-loc-domain' ); ?></label></th>
+        <td><input maxlength="128" size="30" name="mstw_gl_city" 
         	value="<?php echo esc_attr( $mstw_gl_city ) ; ?>"/></td>
     </tr>
     <tr valign="top">
-    	<th scope="row"><label for="$mstw_gl_state">State:</label></th>
-        <td><input maxlength="45" size="30" name="mstw_gl_state" 
+    	<th scope="row"><label for="$mstw_gl_state"><?php _e( 'State:', 'mstw-loc-domain' ); ?></label></th>
+        <td><input maxlength="128" size="30" name="mstw_gl_state" 
         	value="<?php echo esc_attr( $mstw_gl_state ) ; ?>"/></td>
+		<td><?php _e( 'For US states use 2 letter abbreviation.', 'mstw-loc-domain' ); ?></td>
     </tr>
     <tr valign="top">
-    	<th scope="row"><label for="$mstw_gl_zip">Zip:</label></th>
-        <td><input maxlength="45" size="30" name="mstw_gl_zip" 
+    	<th scope="row"><label for="$mstw_gl_zip"><?php _e( 'Zip:', 'mstw-loc-domain' ); ?></label></th>
+        <td><input maxlength="128" size="30" name="mstw_gl_zip" 
         	value="<?php echo esc_attr( $mstw_gl_zip ); ?>"/></td>
+		<td><?php _e( 'Zip code or postal code.', 'mstw-loc-domain' ); ?></td>
     </tr>
     <tr valign="top">
-    	<th scope="row"><label for="$mstw_gl_custom_url">Custom URL:</label></th>
+    	<th scope="row"><label for="$mstw_gl_custom_url"><?php _e( 'Custom Map URL:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="256" size="30" name="mstw_gl_custom_url" 
         	value="<?php echo esc_url( $mstw_gl_custom_url ); ?>"/></td>
+		<td><?php _e( 'Used to override the map generated from the address fields by Google Maps. Linked from the map thumbnail in the map column.', 'mstw-loc-domain' ); ?></td>
+    </tr>
+	<tr valign="top">
+    	<th scope="row"><label for="$mstw_gl_venue_url"><?php _e( 'Venue URL:', 'mstw-loc-domain' ); ?></label></th>
+        <td><input maxlength="256" size="30" name="mstw_gl_venue_url" 
+        	value="<?php echo esc_url( $mstw_gl_venue_url ); ?>"/></td>
+		<td><?php _e( 'Link to the venue\'s website. Normally linked from the location/venue name column.', 'mstw-loc-domain' ); ?></td>
     </tr>
     </table>
     
@@ -232,6 +243,9 @@ function mstw_gl_save_meta( $post_id ) {
 			
 		update_post_meta($post_id, '_mstw_gl_custom_url',
 			strip_tags( $_POST['mstw_gl_custom_url'] ) );
+			
+		update_post_meta($post_id, '_mstw_gl_venue_url',
+			strip_tags( $_POST['mstw_gl_venue_url'] ) );
 						
 	}  
 }

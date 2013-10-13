@@ -82,6 +82,12 @@ The Settings screen on the Admin Dashboard is new in Version 1.1. The settings b
 
 == Changelog ==
 
+= 1.2 =
+* Internationalized the admin pages. The default .po and .mo files have been updated and are in the /lang directory.
+* A new "Venue URL" data field was added. It provides a link the the location/venue's web page, NOT MAP, from the venue name in the shortcode table.
+* Added the (now standard) display settings to show/hide table columns and relable columns/data fields.
+* Added more color settings and the javascript color picker for them.
+
 = 1.1 =
 * The plugin was "internationalized". It is now ready for translation and the default .po and .mo files are in the /lang directory.
 * The Game Locations table was enhanced to add map icons for each location.
