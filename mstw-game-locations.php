@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //		which is used by the shortcode that generates the locations table.
 //
 // 20120414 - MAO:
-//	- Changed mstw_remove_view to mstw_gs_remove_view to avoid conflicts with other
+//	- Changed mstw_remove_view to mstw_gl_remove_view to avoid conflicts with other
 //		mstw plugins
 //
 // 20120504 - MAO:
@@ -51,56 +51,110 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //	- Added an admin settings section to support the new map graphics.
 //	- Updated the code to support Internationalization. (Missing and incorrect wrappers.)
 //
-// -----------------------------------------------------------------------*/
-
-?>
-<?php 
+// -----------------------------------------------------------------------*/ 
 
 // ----------------------------------------------------------------
 // Deactivate, request upgrade, and exit if WP version is not right
-add_action( 'admin_init', 'mstw_gl_requires_wp_ver' );
-
 // ----------------------------------------------------------------
-function mstw_gl_requires_wp_ver() {
-	global $wp_version;
-	$plugin = plugin_basename( __FILE__ );
-	$plugin_data = get_plugin_data( __FILE__, false );
+	add_action( 'admin_init', 'mstw_gl_requires_wp_ver' );
 
-	if ( version_compare($wp_version, "3.3", "<" ) ) {
-		if( is_plugin_active($plugin) ) {
-			deactivate_plugins( $plugin );
-			wp_die( "'".$plugin_data['Name']."' requires WordPress 3.3 or higher, and has been deactivated! 
-				Please upgrade WordPress and try again.<br /><br />Back to <a href='".admin_url()."'>WordPress admin</a>." );
+	function mstw_gl_requires_wp_ver() {
+		global $wp_version;
+		$plugin = plugin_basename( __FILE__ );
+		$plugin_data = get_plugin_data( __FILE__, false );
+
+		if ( version_compare($wp_version, "3.3", "<" ) ) {
+			if( is_plugin_active($plugin) ) {
+				deactivate_plugins( $plugin );
+				wp_die( "'" . $plugin_data['Name'] . "' " . __( 'requires WordPress 3.3 or higher, and has been deactivated! Please upgrade WordPress and try again.', 'mstw-loc-domain' ) . '<br /><br />' . __( 'Back to', 'mstw-loc-domain' ) . " <a href='" . admin_url() . "'>" . __( 'WordPress admin', 'mstw-loc-domain' ) . "</a>." );
+			}
 		}
 	}
-}
 
-/* Queue up the necessary CSS */
-add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
-
-// ------------------------------------------------------------------------------
-// Callback for: add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
-// ------------------------------------------------------------------------------
-// Loads the Cascading Style Sheet for the [mstw-gl-table] shortcode
-// ------------------------------------------------------------------------------
-function mstw_gl_enqueue_styles () {
+	// ----------------------------------------------------------------
+	// Need the admin utils for convenience
+	// ----------------------------------------------------------------
+	if ( !function_exists( 'mstw_admin_utils_loaded' ) ) {
+		// we're in wp-admin
+		require_once ( dirname( __FILE__ ) . '/includes/mstw-admin-utils.php' );
+    }
 	
-	/* Find the full path to the css file & register the style */
-	$mstw_gl_style_url = plugins_url( '/css/mstw-gl-styles.css', __FILE__ );
+	// ----------------------------------------------------------------	
+	// Add styles and scripts for the color picker. 
+	/*
+	add_action( 'admin_enqueue_scripts', 'mstw_gl_enqueue_color_picker' );
 	
-	wp_register_style( 'mstw_gl_style', $mstw_gl_style_url );
-	
-	//$mstw_gl_style_file = WP_PLUGIN_DIR . '/mstw-game-locations/css/mstw-gl-styles.css';
-	
-	
-	/* If cssfile exists, register & enqueue the style */
-	$mstw_gl_style_file = dirname( __FILE__ ) . '/css/mstw-gl-styles.css';
-	
-	if ( file_exists( $mstw_gl_style_file ) ) {
-		wp_enqueue_style( 'mstw_gl_style' );	
+	function mstw_gl_enqueue_color_picker( $hook_suffix ) {
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'mstw-gl-color-picker', plugins_url( 'game-locations/js/gl-color-settings.js' ), array( 'wp-color-picker' ), false, true ); 
 	}
-}
+	*/
 
+	//-----------------------------------------------------------------
+	// Queue up the necessary CSS 
+	//
+	add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
+
+	function mstw_gl_enqueue_styles ( ) {
+		/* Find the full path to the css file & register the style */
+		$mstw_gl_style_url = plugins_url( '/css/mstw-gl-styles.css', __FILE__ );
+		
+		wp_register_style( 'mstw_gl_style', $mstw_gl_style_url );
+		
+		/* If cssfile exists, register & enqueue the style */
+		$mstw_gl_style_file = dirname( __FILE__ ) . '/css/mstw-gl-styles.css';
+		
+		if ( file_exists( $mstw_gl_style_file ) ) {
+			wp_enqueue_style( 'mstw_gl_style' );	
+		}
+	}
+
+	// ----------------------------------------------------------------
+	// Add the custom MSTW icon to CPT pages
+	//
+	add_action('admin_head', 'mstw_gl_custom_css');
+	
+	function mstw_gl_custom_css() { ?>
+		<style type="text/css">
+			#icon-mstw-gl-main-menu.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' ); ?>) transparent no-repeat;
+			}
+			#icon-game_locations.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' ); ?>) transparent no-repeat;
+			}
+			#icon-edit.icon32-posts-game_locations {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#menu-posts-game_locations .wp-menu-image {
+				background-image: url(<?php echo plugins_url( '/game-locations/images/mstw-admin-menu-icon.png', 'game-locations' );?>) no-repeat 6px -17px !important;
+			}
+			
+		</style>
+	<?php }
+	
+	// ----------------------------------------------------------------
+	// Remove Quick Edit Menu	
+	//
+	add_filter( 'post_row_actions', 'mstw_gl_remove_quick_edit', 10, 2 );
+
+	function mstw_gl_remove_quick_edit( $actions, $post ) {
+		if( $post->post_type == 'player' ) {
+			unset( $actions['inline hide-if-no-js'] );
+		}
+		return $actions;
+	}
+
+	// ----------------------------------------------------------------
+	// Remove the Bulk Actions pull-down edit option
+	//
+	add_filter( 'bulk_actions-edit-player', 'mstw_gl_bulk_actions' );
+
+    function mstw_gl_bulk_actions( $actions ){
+        unset( $actions['edit'] );
+        return $actions;
+    }
+	
+	
 // --------------------------------------------------------------------------------------
 // GAME LOCATIONS CUSTOM POST TYPE STUFF
 // --------------------------------------------------------------------------------------
@@ -113,7 +167,7 @@ function mstw_gl_enqueue_styles () {
 
 // FILTERS
 // 		'manage_edit-game_locations_columns'			mstw_gl_edit_columns
-//		'post_row_actions'								mstw_gs_remove_view
+//		'post_row_actions'								mstw_gl_remove_view
 //		
 // --------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------
@@ -121,6 +175,9 @@ add_action( 'init', 'mstw_gl_register_post_type' );
 // --------------------------------------------------------------------------------------
 function mstw_gl_register_post_type() {
 	/* Set up the arguments for the Game Locations post type */
+	
+	$menu_icon_url = plugins_url( ) . '/game-locations/images/mstw-admin-menu-icon.png';
+	
 	$args = array(
     	'public' => true,
         'query_var' => 'game_locations',
@@ -144,7 +201,20 @@ function mstw_gl_register_post_type() {
             'search_items' => __( 'Search Game Locations', 'mstw-loc-domain' ),
             'not_found' => __( 'No Locations Found', 'mstw-loc-domain' ),
             'not_found_in_trash' => __( 'No Locations Found In Trash', 'mstw-loc-domain' ),
-        	)
+        	),
+		
+		//'taxonomies' => array( 'teams' ),
+		
+		//'show_in_admin_bar'   => true,
+		//'exclude_from_search' => false,
+		//'show_ui'             => true,
+		//'show_in_menu'        => 'mstw-tr-main-menu',
+		//'menu_position'       => null,
+		'menu_icon'           	=> $menu_icon_url,
+		//'can_export'          => true,
+		//'delete_with_user'    => false,
+		//'hierarchical'        => false,
+		//'has_archive'         => 'players',	
 		);
 	
 	register_post_type( 'game_locations', $args);
@@ -191,7 +261,7 @@ function mstw_gl_create_ui( $post ) {
     	<th scope="row"><label for="$mstw_gl_state"><?php _e( 'State:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="128" size="30" name="mstw_gl_state" 
         	value="<?php echo esc_attr( $mstw_gl_state ) ; ?>"/></td>
-		<td><?php _e( 'For US states use 2 letter abbreviation.', 'mstw-loc-domain' ); ?></td>
+		<td><?php _e( 'For US states use 2 letter abbreviation. Can include country, e.g, "WI, US", or use only country, e.g, "UK". Just check what works with Google Maps if you aren\'t using a custom map URL.', 'mstw-loc-domain' ); ?></td>
     </tr>
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_zip"><?php _e( 'Zip:', 'mstw-loc-domain' ); ?></label></th>
@@ -230,13 +300,14 @@ function mstw_gl_save_meta( $post_id ) {
 			
 		update_post_meta($post_id, '_mstw_gl_city',
 			strip_tags( $_POST['mstw_gl_city'] ) );
-			
-		$trimmed = trim( $_POST['mstw_gl_state'] );
-		if(empty( $trimmed ) ) 
-			update_post_meta($post_id, '_mstw_gl_state', 'CA' );
-		else 
-			update_post_meta($post_id, '_mstw_gl_state', 
-				strip_tags( $_POST['mstw_gl_state'] ) );
+		
+		// We don't really want to default to CA, do we??		
+		//$trimmed = trim( $_POST['mstw_gl_state'] );
+		//if(empty( $trimmed ) ) 
+			//update_post_meta($post_id, '_mstw_gl_state', 'CA' );
+		//else 
+		update_post_meta($post_id, '_mstw_gl_state', 
+			strip_tags( $_POST['mstw_gl_state'] ) );
 			
 		update_post_meta($post_id, '_mstw_gl_zip',
 			strip_tags( $_POST['mstw_gl_zip'] ) );
@@ -264,17 +335,17 @@ function mstw_gl_edit_columns( $columns ) {
 		'city' => __( 'City', 'mstw-loc-domain' ),
 		'state' => __( 'State', 'mstw-loc-domain' ),
 		'zip' => __( 'Zip', 'mstw-loc-domain' ),
-		'custom_url' => __( 'Custom URL', 'mstw-loc-domain' )
+		'custom_url' => __( 'Custom Map URL', 'mstw-loc-domain' ),
+		'venue_url' => __( 'Venue URL', 'mstw-loc-domain' ),
 	);
 
 	return $columns;
 }
 
 // --------------------------------------------------------------------------------------
-add_action( 'manage_game_locations_posts_custom_column', 'mstw_gl_manage_columns', 10, 2 );
-// --------------------------------------------------------------------------------------
 // Display the Game Locations 'view all' columns
-// --------------------------------------------------------------------------------------
+add_action( 'manage_game_locations_posts_custom_column', 'mstw_gl_manage_columns', 10, 2 );
+
 function mstw_gl_manage_columns( $column, $post_id ) {
 	global $post;
 	
@@ -342,11 +413,25 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 			$mstw_gl_custom_url = get_post_meta( $post_id, '_mstw_gl_custom_url', true );
 
 			if ( empty( $mstw_gl_custom_url ) )
-				echo __( 'No URL, use address.', 'mstw-loc-domain' );
+				echo __( 'None (use address)', 'mstw-loc-domain' );
 			else
 				printf( '%s', $mstw_gl_custom_url );
 
-			break;			
+			break;	
+
+		/* If displaying the 'venue url' column. */
+		case 'venue_url' :
+
+			/* Get the post meta. */
+			$mstw_gl_venue_url = get_post_meta( $post_id, '_mstw_gl_venue_url', true );
+
+			if ( empty( $mstw_gl_venue_url ) )
+				echo __( 'No Venue URL.', 'mstw-loc-domain' );
+			else
+				printf( '%s', $mstw_gl_venue_url );
+				//echo $mstw_gl_venue_url;
+
+			break;				
 			
 		/* Just break out of the switch statement for everything else. */
 		default :
@@ -354,45 +439,42 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 	}
 }
 
-// --------------------------------------------------------------------------------------
-if (is_admin()) {
-	add_filter('post_row_actions','mstw_gs_remove_view',10,2);
-}			
-// --------------------------------------------------------------------------------------
-//removes view from mstw_game_locatations list
-function mstw_gs_remove_view( $actions ) {
-	global $post;
-    if( $post->post_type == 'game_locations' ) {
-		unset( $actions['view'] );
+	// --------------------------------------------------------------------------------------
+	//removes view from mstw_game_locatations list
+	if (is_admin()) {
+		add_filter('post_row_actions','mstw_gl_remove_view',10,2);
+	}			
+
+	function mstw_gl_remove_view( $actions ) {
+		global $post;
+		if( $post->post_type == 'game_locations' ) {
+			unset( $actions['view'] );
+		}
+		return $actions;
 	}
-    return $actions;
-}
 
+	// --------------------------------------------------------------------------------------
+	// Add the shortcode handler, which builds the Game Locations table on the user side.
+	// Handles the shortcode parameters, if there were any, 
+	// then calls mstw_gl_build_loc_tab() to create the output
+	// --------------------------------------------------------------------------------------
+	add_shortcode( 'mstw_gl_table', 'mstw_gl_shortcode_handler' );
 
-// --------------------------------------------------------------------------------------
-add_shortcode( 'mstw_gl_table', 'mstw_gl_shortcode_handler' );
-// --------------------------------------------------------------------------------------
-// Add the shortcode handler, which will create the Game Locations table on the user side.
-// Handles the shortcode parameters, if there were any, 
-// then calls mstw_gl_build_loc_tab() to create the output
-// --------------------------------------------------------------------------------------
-function mstw_gl_shortcode_handler(){	
-	$mstw_gl_loc_tab = mstw_gl_build_loc_tab();
-	return $mstw_gl_loc_tab;
-}
+	function mstw_gl_shortcode_handler(){	
+		$mstw_gl_loc_tab = mstw_gl_build_location_table( );
+		return $mstw_gl_loc_tab;
+	}
 
-// --------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // Called by:	mstw_gl_shortcode_handler
-// Builds the Game Locations table as a string (to replace the [shortcode] in a page or post.
-// Loops through the Game Locations Custom posts and formats them into a pretty table.
-// --------------------------------------------------------------------------------------
-function mstw_gl_build_loc_tab() {
+// Builds the Game Locations table as a string 
+//	to replace the [shortcode] in a page or post). Loops through the 
+//	Game Locations and formats them into a pretty table.
+// -----------------------------------------------------------------------
+function mstw_gl_build_location_table( ) {
 	// Get the settings/options
 	$options = get_option( 'mstw_gl_options' );
-	$gl_instructions = $options['gl_instructions'];
-	$gl_map_width = $options['gl_map_width'];
-	$gl_map_height = $options['gl_map_heigth'];
-	$gl_marker_color = $options['gl_marker_color'];;
+	extract( $options );
 
 	// Get the game_location posts
 	$posts = get_posts(array( 'numberposts' => -1,
@@ -404,17 +486,26 @@ function mstw_gl_build_loc_tab() {
     if($posts) {
 		// Make table of posts
 		// Start with some instructions at the top
-		if ( $gl_instructions == '' ) {
-			$gl_instructions = __( 'Click on map to view driving directions.', 'mstw-loc-domain' );
+		if ( $show_instructions ) {
+			if ( $gl_instructions == '' ) {
+				$gl_instructions = __( 'Click on map to view driving directions.', 'mstw-loc-domain' );
+			}
+			$output = '<p>' . $gl_instructions . '</p>';
 		}
-        $output = '<p>' . $gl_instructions . '</p>';
 		
 		// Now build the table's header
         $output .= '<table class="mstw-gl-table">';
         $output .= '<thead class="mstw-gl-table-head"><tr>';
-		$output .= '<th>' . __( 'Location', 'mstw-loc-domain' ) . '</th>';
-        $output .= '<th>' . __( 'Address', 'mstw-loc-domain' ) . '</th>';
-		$output .= '<th>' . __( 'Map', 'mstw-loc-domain' ) . ' (' . __( 'Click for larger view', 'mstw-loc-domain' ) . ')</th>';
+		$output .= '<th>' . $location_label . '</th>';
+		
+		if ( $show_address ) {
+			$output .= '<th>' . $address_label . '</th>';
+		}
+		
+		if ( $show_map ) {
+			$output .= '<th>' . $map_label . '</th>';
+		}
+		
 		$output .= '</tr></thead>';
 		
 		// Loop through the posts and make the rows
@@ -430,70 +521,137 @@ function mstw_gl_build_loc_tab() {
 			
 			// create the row
 			
-			// column1: location name to the map
-			$row_string = $row_tr . $row_td . get_the_title( $post->ID ) . '</td>';
+			// column1: location name to the map - 0 means don't build an image
+			$link_str = mstw_gl_build_location_link( $location_link, $post, 0 );
+					
+			$row_string = $row_tr . $row_td . $link_str . '</td>';
 			
 			// column2: create the address in a pretty format
-			$row_string = $row_string . $row_td . get_post_meta( $post->ID, '_mstw_gl_street', true ) . '<br/>' . 
-				get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
-				get_post_meta( $post->ID, '_mstw_gl_state', true ) . '  ' . 
-				get_post_meta( $post->ID, '_mstw_gl_zip', true ) . '</td>';
-				
+			if ( $show_address ) {
+				$row_string .= $row_td . get_post_meta( $post->ID, '_mstw_gl_street', true ) . '<br/>' . 
+					get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
+					get_post_meta( $post->ID, '_mstw_gl_state', true ) . '  ' . 
+					get_post_meta( $post->ID, '_mstw_gl_zip', true ) . '</td>';
+			}
+			
 			// column3: map image and link to map
 			
 			// look for a custom url, if none, build one
-			$custom_url = trim( get_post_meta( $post->ID, '_mstw_gl_custom_url', true) );
-			
-			if ( empty( $custom_url ) ) {  // build the url from the address fields
-				$center_string = get_the_title( $post->ID ). "," .
-					get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
-					get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
-					get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
-					get_post_meta( $post->ID, '_mstw_gl_zip', true );
+			if ( $show_map ) {
+				$custom_url = trim( get_post_meta( $post->ID, '_mstw_gl_custom_url', true) );
+				
+				if ( empty( $custom_url ) ) {  // build the url from the address fields
+					$center_string = get_the_title( $post->ID ). "," .
+						get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
+						get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
+						get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
+						get_post_meta( $post->ID, '_mstw_gl_zip', true );
+						
+					$href = '<a href="https://maps.google.com?q=' .$center_string . '" target="_blank" >';
 					
-				$href = '<a href="https://maps.google.com?q=' .$center_string . '" target="_blank" >';
+					if ( $gl_map_width == "" ) {
+						$gl_map_width = 250;
+					}
+					if ( $gl_map_height == "" ) {
+						$gl_map_height = 75;
+					}
+					if ( $gl_marker_color == "" ) {
+						$gl_marker_color = 'blue';
+					}
+					
+					$row_string .= $row_td . $href . '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' . $center_string . 
+						'&markers=size:mid%7Ccolor:' . $gl_marker_color . '%7C' . $center_string . 
+						'&zoom=15&size=' . $gl_map_width . 'x' . $gl_map_height . '&maptype=roadmap&sensor=false" />' . '</a></td>';
 				
-				if ( $gl_map_width == "" ) {
-					$gl_map_width = 250;
 				}
-				if ( $gl_map_heigth == "" ) {
-					$gl_map_height = 75;
+				else {  // use the custom url
+					$href = '<a href="' . $custom_url . '" target="_blank">';
+					
+					$row_string .= $row_td . $href . __( 'Custom Map', 'mstw-loc-domain' ) . '</a></td>';
 				}
-				if ( $gl_marker_color == "" ) {
-					$gl_marker_color = 'blue';
-				}
-				
-				$row_string .= $row_td . $href . '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' . $center_string . 
-					'&markers=size:mid%7Ccolor:' . $gl_marker_color . '%7C' . $center_string . 
-					'&zoom=15&size=' . $gl_map_width . 'x' . $gl_map_height . '&maptype=roadmap&sensor=false" />' . '</a></td>';
-			
-			}
-			else {  // use the custom url
-				$href = '<a href="' . $custom_url . '" target="_blank">';
-				
-				$row_string .= $row_td . $href . __( 'Custom Map', 'mstw-loc-domain' ) . '</a></td>';
 			}
 			
 			//$row_string = $row_tr . $row_td . $href . get_the_title( $post->ID ) . '</a></td>';
 			
 			
 			
-			$output = $output . $row_string;
+			$output .= $row_string;
 			
 			$row_cnt = 1- $row_cnt;  // Get the styles right
 			
 		} // end of foreach post
-		$output = $output . '</table>';
+		$output .= '</table>';
 	}
 	else { // No posts were found
-		$output = "<h3> No Game Locations found. </h3>";
+		$output = "<h3> No Game Locations Found. </h3>";
 	}
 	return $output;
 }
+//---------------------------------------------------------------
+// Build the location link for the title & map
+//---------------------------------------------------------------
+	function mstw_gl_build_location_link( $link_type, $post, $build_image ) { 
+	
+		$location = get_the_title( $post->ID ); 
+		$map_url = get_post_meta( $post->ID, '_mstw_gl_custom_url', true );
+		$venue_url = get_post_meta( $post->ID, '_mstw_gl_venue_url', true );
+		
+		switch ( $link_type ) {
+			case 1: 	//link to map
+				if ( !empty( $map_url ) ) {
+					//use custom map url
+					$ret_str = "<a href='" . $map_url . "' target='_blank'>" . $location . "</a>";
+				} else { //build google maps href from address
+				
+					$center_string = $location. "," .
+						get_post_meta( $post->ID, '_mstw_gl_street', true ) . ', ' .
+						get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
+						get_post_meta( $post->ID, '_mstw_gl_state', true ) . ', ' . 
+						get_post_meta( $post->ID, '_mstw_gl_zip', true );
+						
+					$href = '<a href="https://maps.google.com?q=' .$center_string . '" target="_blank" >'; 
+					
+					if ( $build_image ) {
+						
+						
+						if ( $gl_map_width == "" ) {
+							$gl_map_width = 250;
+						}
+						if ( $gl_map_height == "" ) {
+							$gl_map_height = 75;
+						}
+						if ( $gl_marker_color == "" ) {
+							$gl_marker_color = 'blue';
+						}
+						
+						$ret_str = $href . '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' . $center_string . 
+							'&markers=size:mid%7Ccolor:' . $gl_marker_color . '%7C' . $center_string . 
+							'&zoom=15&size=' . $gl_map_width . 'x' . $gl_map_height . '&maptype=roadmap&sensor=false" />' . '</a>';
+					} else {
+						$ret_str = $href . $location . '</a>';
+					}
+				}
+				break;
+			
+			case 2:		//link to venue
+				if ( !empty( $venue_url ) ) {
+					$ret_str = "<a href='" . $venue_url . "' target='_blank'>" . $location . "</a>";
+				} else {
+					$ret_str = $location;
+				}
+			break;
+			
+			default: 	//no link
+				$ret_str = $location;
+			break;
+		}
 
-/****************************************************************/
+		return $ret_str;
+	}
+
+//---------------------------------------------------------------
 // ADMIN PAGE SETTINGS
-/****************************************************************/
+//---------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------
 // Add a menu for our option page
@@ -530,99 +688,221 @@ function mstw_gl_option_page() {
 }
 
 // --------------------------------------------------------------------------------------
-// Register and define the settings
-add_action('admin_init', 'mstw_gl_admin_init');
-function mstw_gl_admin_init(){
-	register_setting(
-		'mstw_gl_options',
-		'mstw_gl_options',
-		'mstw_gl_validate_options'
-	);
+	// Register and define the settings
+	add_action('admin_init', 'mstw_gl_admin_init');
 	
-	// First (& only?) Section
-	add_settings_section(
-		'mstw_gl_main_settings',
-		'Game Locations Settings',
-		'mstw_gl_main_settings_text',
-		'mstw_gl_settings'
-	);
+	function mstw_gl_admin_init(){
+		register_setting(
+			'mstw_gl_options',
+			'mstw_gl_options',
+			'mstw_gl_validate_options'
+		);
+		
+		mstw_gl_setup_column_settings( );
+	}
+
+	function mstw_gl_setup_column_settings( ) {
 	
-	// Instructions above locations table
-	add_settings_field(
-		'mstw_gl_instructions',
-		'Locations Table Instructions (defaults to "Click on map to view driving directions."):',
-		'mstw_gl_instructions_input',
-		'mstw_gl_settings',
-		'mstw_gl_main_settings'
-	);
+		$options = get_option( 'mstw_gl_options' );
 	
-	// Color for location marker on map
-	add_settings_field(
-		'mstw_gl_marker_color',
-		'Map marker color (hex):',
-		'mstw_gl_marker_color_input',
-		'mstw_gl_settings',
-		'mstw_gl_main_settings'
-	);
+		$display_on_page = 'mstw_gl_settings';
+		$page_section = 'mstw_gl_column_settings';
 	
-	// Width of map icon in location table
-	add_settings_field(
-		'mstw_gl_map_width',
-		'Map icon (in table) width (pixels):',
-		'mstw_gl_map_width_input',
-		'mstw_gl_settings',
-		'mstw_gl_main_settings'
-	);
-	
-	// Height of map icon in location table
-	add_settings_field(
-		'mstw_gl_map_height',
-		'Map icon (in table) height (pixels):',
-		'mstw_gl_map_height_input',
-		'mstw_gl_settings',
-		'mstw_gl_main_settings'
-	);
-}
+		// Column Visibility and Label Section
+		add_settings_section(
+			$page_section,
+			'Column Visibility & Label Settings Settings',
+			'mstw_gl_column_settings_text',
+			$display_on_page
+		);
+		
+		// Show/hide INSTRUCTIONS above table
+		$args = array( 	'id' => 'show_instructions',
+						'name'	=> 'mstw_gl_options[show_instructions]',
+						'value'	=> $options['show_instructions'],
+						'label'	=> __( 'Show or hide the instructions above the table. (Default: Show)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'show_instructions',
+			__( 'Show Instructions:', 'mstw-loc-domain' ),
+			'mstw_utl_show_hide_ctrl',
+			$display_on_page,  //mstw_gl_settings
+			$page_section,  //mstw_gl_column_settings
+			$args
+		);	
+		
+		// Instructions above locations table
+		$args = array( 	'id' => 'gl_instructions',
+						'name'	=> 'mstw_gl_options[gl_instructions]',
+						'value'	=> $options['gl_instructions'],
+						'label'	=> __( 'Defaults to "Click on map to view driving directions."', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_instructions',
+			__( 'Locations Table Instructions:', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+		// LOCATION column label
+		$args = array( 	'id' => 'location_label',
+						'name'	=> 'mstw_gl_options[location_label]',
+						'value'	=> $options['location_label'],
+						'label'	=> __( 'Set label for location column. (Default: "Location). NOTE that this column cannot be hidden.")', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_location_label',
+			__( 'Location Column Label:', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+		// Location link
+		$args = array( 	'options' => array( 'No Link' => 0,
+											'Add Link to Map' => 1,
+											'Add Link to Venue' => 2,
+											),
+						'id' => 'location_link',
+						'name'	=> 'mstw_gl_options[location_link]',
+						'value'	=> $options['location_link'],
+						'label'	=> __( 'Either an address or a custom map URL must be specified to add a link to a map. A venue URL must be specified to add a link to a venue. (Default: No Link)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'location_link',
+			__( 'Add Link from Location:', 'mstw-loc-domain' ),
+			'mstw_utl_select_option_ctrl', 
+			$display_on_page,
+			$page_section,
+			$args
+		);	
+		
+		// Show/hide ADDRESS column
+		$args = array( 	'id' => 'show_address',
+						'name'	=> 'mstw_gl_options[show_address]',
+						'value'	=> $options['show_address'],
+						'label'	=> __( 'Show or hide the Address column. (Default: Show)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_show_address',
+			__( 'Show Address Column:', 'mstw-loc-domain' ),
+			'mstw_utl_show_hide_ctrl',
+			$display_on_page,  //mstw_gl_settings
+			$page_section,  //mstw_gl_column_settings
+			$args
+		);	
+		
+		// ADDRESS column label
+		$args = array( 	'id' => 'address_label',
+						'name'	=> 'mstw_gl_options[address_label]',
+						'value'	=> $options['address_label'],
+						'label'	=> __( 'Set label for address column. (Default: "Address")', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_address_label',
+			__( 'Address Column Label:', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+		// Show/hide MAP column
+		$args = array( 	'id' => 'show_map',
+						'name'	=> 'mstw_gl_options[show_map]',
+						'value'	=> $options['show_map'],
+						'label'	=> __( 'Show or hide the Map column. (Default: Show)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'show_map',
+			__( 'Show Map Column:', 'mstw-loc-domain' ),
+			'mstw_utl_show_hide_ctrl',
+			$display_on_page,  //mstw_gl_settings
+			$page_section,  //mstw_gl_column_settings
+			$args
+		);
+
+		// MAP column label
+		$args = array( 	'id' => 'map_label',
+						'name'	=> 'mstw_gl_options[map_label]',
+						'value'	=> $options['map_label'],
+						'label'	=> __( 'Set label for map column. (Default: "Map (Click for larger view)")', 'mstw-loc-domain' )
+						//'label' => 'number_label: ' . $options['number_label'] . '::'
+						);						
+		add_settings_field(
+			'gl_map_label',
+			__( 'Map Column Label:', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+		// Color for location marker on map
+		$args = array( 	'options' => array( 'black' => 'black',
+											'blue' => 'blue',
+											'brown' => 'brown',
+											'gray' => 'gray',
+											'green' =>  'green',
+											'orange' => 'orange',
+											'purple' =>  'purple',
+											'red' => 'red',
+											'white' => 'white',
+											),
+						'id' => 'gl_marker_color',
+						'name'	=> 'mstw_gl_options[gl_marker_color]',
+						'value'	=> $options['gl_marker_color'],
+						'label'	=> __( 'Marker color on map in locations table. Standard Google Maps colors. (Default: Blue)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_marker_color',
+			__( 'Map Marker Color:', 'mstw-loc-domain' ),
+			'mstw_utl_select_option_ctrl', 
+			$display_on_page,
+			$page_section,
+			$args
+		);	
+		
+		// MAP ICON WIDTH in location table
+		$args = array( 	'id' => 'gl_map_width',
+						'name'	=> 'mstw_gl_options[gl_map_width]',
+						'value'	=> $options['gl_map_width'],
+						'label'	=> __( 'Width in pixels (Default: 175)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_map_width',
+			__( 'Map icon width (in table):', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+		// MAP ICON HEIGHT in location table
+		$args = array( 	'id' => 'gl_map_height',
+						'name'	=> 'mstw_gl_options[gl_map_height]',
+						'value'	=> $options['gl_map_height'],
+						'label'	=> __( 'Height in pixels (Default: 75)', 'mstw-loc-domain' )
+						);						
+		add_settings_field(
+			'gl_map_height',
+			__( 'Map icon height (in table):', 'mstw-loc-domain' ),
+			'mstw_utl_text_ctrl',
+			$display_on_page,
+			$page_section,
+			$args
+		);
+		
+	}
 
 // Main settings section instructions
-function mstw_gl_main_settings_text( ) {
-	echo '<p>' . __( 'Enter your game locations table settings. ', 'mstw-loc-domain' ) . '<br/>' . __( 'All color values are in hex, in the format 0x followed by six hex digits. For example, 0x123abd.', 'mstw-loc-domain' ) .  '</p>';
-}
-
-/*--------------------------------------------------------------
- *	Input fields for the main section
- */
- 
- function mstw_gl_instructions_input( ) {
-	// get option 'gl_instructions' value from the database
-	$options = get_option( 'mstw_gl_options' );
-	$gl_instructions = $options['gl_instructions'];
-	// echo the field
-	echo "<input id='gl_instructions' name='mstw_gl_options[gl_instructions]' type='text' size='50' value='$gl_instructions' />";
-}
- 
-function mstw_gl_marker_color_input( ) {
-	// get option 'gl_marker_color' value from the database
-	$options = get_option( 'mstw_gl_options' );
-	$gl_marker_color = $options['gl_marker_color'];
-	// echo the field
-	echo "<input id='gl_marker_color' name='mstw_gl_options[gl_marker_color]' type='text' value='$gl_marker_color' />";
-}
-
-function mstw_gl_map_width_input() {
-	// get option 'gl_map_width' value from the database
-	$options = get_option( 'mstw_gl_options' );
-	$gl_map_width = $options['gl_map_width'];
-	// echo the field
-	echo "<input id='gl_map_width' name='mstw_gl_options[gl_map_width]' type='text' value='$gl_map_width' />";
-}
-
-function mstw_gl_map_height_input() {
-	// get option 'gl_map_height' value from the database
-	$options = get_option( 'mstw_gl_options' );
-	$gl_map_height = $options['gl_map_height'];
-	// echo the field
-	echo "<input id='gl_map_height' name='mstw_gl_options[gl_map_height]' type='text' value='$gl_map_height' />";
+function mstw_gl_column_settings_text( ) {
+	echo '<p>' . __( 'Enter your game locations table settings. ', 'mstw-loc-domain' ) . '</p>';
+	
+	//. __( 'All color values are in hex, in the format 0x followed by six hex digits. For example, 0x123abd.', 'mstw-loc-domain' ) .  '</p>';
 }
 
 /*--------------------------------------------------------------
@@ -640,9 +920,9 @@ function mstw_gl_validate_options( $input ) {
 		if( isset( $input[$key] ) ) {
 			switch ( $key ) {
 				// add the hex colors
-				case 'gl_marker_color':
+				case 'none_right_now':
 					// validate the color for proper hex format
-					$sanitized_color = mstw_gl_sanitize_hex_color( $input[$key] );
+					$sanitized_color = mstw_utl_sanitize_hex_color( $input[$key] );
 					
 					// decide what to do - save new setting 
 					// or display error & revert to last setting
@@ -680,20 +960,6 @@ function mstw_gl_validate_options( $input ) {
 	// Return the array processing any additional functions filtered by this action
 	
 	return apply_filters( 'mstw_gl_validate_filters', $output, $input );
-}
-
-function mstw_gl_sanitize_hex_color( $color ) {
-	// Check $color for proper hex color format (3 or 6 digits) or the empty string.
-	// Returns corrected string if valid hex color, returns null otherwise
-	
-	if ( '' === $color )
-		return '';
-
-	// 3 or 6 hex digits, or the empty string.
-	if ( preg_match('|^0x([A-Fa-f0-9]{6})$|', $color ) /*preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color )*/ )
-		return $color;
-
-	return null;
 }
 
 /*--------------------------------------------------------------
