@@ -65,6 +65,7 @@
 		
 		echo "<input type='text' id='$id' name='$name' value='$value' /> \n";
 		//echo "<label for='$id'>$label</label> \n";
+		echo ( $label != '' ? "<br /><span class='description'>$label</span>" : "" );
 
 	} //End: mstw_utl_color_ctrl
  
