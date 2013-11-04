@@ -30,26 +30,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 /* ------------------------------------------------------------------------
 // PLUGIN PREFIX:                                                          
 // 'mstw_gl_'   derived from mysportsteamwebsite game locations
-
-// 20120412 - MAO: 
-//	- Added street address to Google Maps URL in function mstw_gl_build_loc_tab()
-//		which is used by the shortcode that generates the locations table.
 //
-// 20120414 - MAO:
-//	- Changed mstw_remove_view to mstw_gl_remove_view to avoid conflicts with other
-//		mstw plugins
-//
-// 20120504 - MAO:
-//	- Expanded maxlength of custom URL field to 120
-//
-// 20120928 - MAO:
-//	- Expanded maxlength of custom URL field to 256
-//
-// 20130121 - MAO:
-//	- Added a new table column with small map graphics from google maps. Looks nicer but
-//		no real change to the basic functionality.
-//	- Added an admin settings section to support the new map graphics.
-//	- Updated the code to support Internationalization. (Missing and incorrect wrappers.)
+// CHANGE LOG: 
+//	See the SVN repository at http://wordpress.org/plugins/game-locations/developers/
 //
 // -----------------------------------------------------------------------*/ 
 
@@ -189,7 +172,7 @@ function mstw_gl_register_post_type() {
             'title'
         ),
         'labels' => array(
-            'name' => __( 'MSTW Game Locations', 'mstw-loc-domain' ),
+            'name' => __( 'Game Locations', 'mstw-loc-domain' ),
             'singular_name' => __( 'Game Location', 'mstw-loc-domain' ),
 			'all_items' => __( 'All Locations', 'mstw-loc-domain' ),
             'add_new' => __( 'Add New Location', 'mstw-loc-domain' ),
@@ -244,6 +227,7 @@ function mstw_gl_create_ui( $post ) {
 	$mstw_gl_zip = get_post_meta($post->ID, '_mstw_gl_zip', true );
 	$mstw_gl_custom_url = get_post_meta($post->ID, '_mstw_gl_custom_url', true );  
 	$mstw_gl_venue_url = get_post_meta($post->ID, '_mstw_gl_venue_url', true ); 
+	$mstw_gl_home_venue = get_post_meta($post->ID, '_mstw_gl_home_venue', true );
 	?>	
 	
    <table class="form-table">
@@ -281,6 +265,7 @@ function mstw_gl_create_ui( $post ) {
         	value="<?php echo esc_url( $mstw_gl_venue_url ); ?>"/></td>
 		<td><?php _e( 'Link to the venue\'s website. Normally linked from the location/venue name column.', 'mstw-loc-domain' ); ?></td>
     </tr>
+	
     </table>
     
 <?php        	
@@ -315,8 +300,11 @@ function mstw_gl_save_meta( $post_id ) {
 		update_post_meta($post_id, '_mstw_gl_custom_url',
 			strip_tags( $_POST['mstw_gl_custom_url'] ) );
 			
-		update_post_meta($post_id, '_mstw_gl_venue_url',
+		update_post_meta( $post_id, '_mstw_gl_venue_url',
 			strip_tags( $_POST['mstw_gl_venue_url'] ) );
+			
+		update_post_meta( $post_id, '_mstw_gl_home_venue', 
+			strip_tags( $_POST['mstw_gl_home_venue'] ) );
 						
 	}  
 }
