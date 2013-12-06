@@ -227,7 +227,6 @@ function mstw_gl_create_ui( $post ) {
 	$mstw_gl_zip = get_post_meta($post->ID, '_mstw_gl_zip', true );
 	$mstw_gl_custom_url = get_post_meta($post->ID, '_mstw_gl_custom_url', true );  
 	$mstw_gl_venue_url = get_post_meta($post->ID, '_mstw_gl_venue_url', true ); 
-	$mstw_gl_home_venue = get_post_meta($post->ID, '_mstw_gl_home_venue', true );
 	?>	
 	
    <table class="form-table">
@@ -302,9 +301,6 @@ function mstw_gl_save_meta( $post_id ) {
 			
 		update_post_meta( $post_id, '_mstw_gl_venue_url',
 			strip_tags( $_POST['mstw_gl_venue_url'] ) );
-			
-		update_post_meta( $post_id, '_mstw_gl_home_venue', 
-			strip_tags( $_POST['mstw_gl_home_venue'] ) );
 						
 	}  
 }
