@@ -1,0 +1,371 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/game-locations\n"
+"POT-Creation-Date: 2013-12-20 04:31:05+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-12-19 20:32-0800\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.6.1\n"
+
+#: includes/mstw-admin-utils.php:138
+msgid "Show"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:139
+msgid "Hide"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:212 includes/mstw-admin-utils.php:214
+msgid "7 Apr 2013"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:213 includes/mstw-admin-utils.php:215
+#: includes/mstw-admin-utils.php:216
+msgid "07 Apr 2013"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:217
+msgid "Tues, 07 Apr 2013"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:218
+msgid "Tues, 7 Apr 13"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:219 includes/mstw-admin-utils.php:220
+msgid "Tuesday, 07 April 2013"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:221
+msgid "Tuesday, 07 Apr"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:222
+msgid "Tues, 7 Apr"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:223
+msgid "7 Apr"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:224
+msgid "07 Apr"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:228
+msgid "Tuesday, 07 April 01:15 pm"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:229
+msgid "Tuesday, 7 April 1:15 pm"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:230
+msgid "Tuesday, 07 April 13:15"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:231
+msgid "Tuesday, 7 April 13:15"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:232
+msgid "07 April 13:15"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:233
+msgid "7 April 13:15"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:234
+msgid "07 April 01:15 pm"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:235
+msgid "7 April 01:15 pm"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:240 includes/mstw-admin-utils.php:322
+msgid "Formats for"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:240
+msgid "7 April 2013 13:15"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:244
+msgid "foobar Formats for"
+msgstr ""
+
+#: includes/mstw-admin-utils.php:244
+msgid "7 April 2013"
+msgstr ""
+
+#: mstw-game-locations.php:52
+msgid ""
+"requires WordPress 3.3 or higher, and has been deactivated! Please upgrade "
+"WordPress and try again."
+msgstr ""
+
+#: mstw-game-locations.php:52
+msgid "Back to"
+msgstr ""
+
+#: mstw-game-locations.php:52
+msgid "WordPress admin"
+msgstr ""
+
+#: mstw-game-locations.php:175
+msgid "Game Locations"
+msgstr ""
+
+#: mstw-game-locations.php:176
+msgid "Game Location"
+msgstr ""
+
+#: mstw-game-locations.php:177
+msgid "All Locations"
+msgstr ""
+
+#: mstw-game-locations.php:178
+msgid "Add New Location"
+msgstr ""
+
+#: mstw-game-locations.php:179
+msgid "Add Location"
+msgstr ""
+
+#: mstw-game-locations.php:180
+msgid "Edit Location"
+msgstr ""
+
+#: mstw-game-locations.php:181
+msgid "New Location"
+msgstr ""
+
+#: mstw-game-locations.php:184
+msgid "Search Game Locations"
+msgstr ""
+
+#: mstw-game-locations.php:185
+msgid "No Locations Found"
+msgstr ""
+
+#: mstw-game-locations.php:186
+msgid "No Locations Found In Trash"
+msgstr ""
+
+#: mstw-game-locations.php:234
+msgid "Street Address:"
+msgstr ""
+
+#: mstw-game-locations.php:239
+msgid "City:"
+msgstr ""
+
+#: mstw-game-locations.php:244
+msgid "State:"
+msgstr ""
+
+#: mstw-game-locations.php:247
+msgid ""
+"For US states use 2 letter abbreviation. Can include country, e.g, \"WI, US"
+"\", or use only country, e.g, \"UK\". Just check what works with Google Maps "
+"if you aren't using a custom map URL."
+msgstr ""
+
+#: mstw-game-locations.php:250
+msgid "Zip:"
+msgstr ""
+
+#: mstw-game-locations.php:253
+msgid "Zip code or postal code."
+msgstr ""
+
+#: mstw-game-locations.php:256
+msgid "Custom Map URL:"
+msgstr ""
+
+#: mstw-game-locations.php:259
+msgid ""
+"Used to override the map generated from the address fields by Google Maps. "
+"Linked from the map thumbnail in the map column."
+msgstr ""
+
+#: mstw-game-locations.php:262
+msgid "Venue URL:"
+msgstr ""
+
+#: mstw-game-locations.php:265
+msgid ""
+"Link to the venue's website. Normally linked from the location/venue name "
+"column."
+msgstr ""
+
+#: mstw-game-locations.php:317
+msgid "Location"
+msgstr ""
+
+#: mstw-game-locations.php:318
+msgid "Street"
+msgstr ""
+
+#: mstw-game-locations.php:319
+msgid "City"
+msgstr ""
+
+#: mstw-game-locations.php:320
+msgid "State"
+msgstr ""
+
+#: mstw-game-locations.php:321
+msgid "Zip"
+msgstr ""
+
+#: mstw-game-locations.php:322
+msgid "Custom Map URL"
+msgstr ""
+
+#: mstw-game-locations.php:323
+msgid "Venue URL"
+msgstr ""
+
+#: mstw-game-locations.php:347
+msgid "No Street Address"
+msgstr ""
+
+#: mstw-game-locations.php:360
+msgid "No City"
+msgstr ""
+
+#: mstw-game-locations.php:374
+msgid "No State"
+msgstr ""
+
+#: mstw-game-locations.php:387
+msgid "No Zip"
+msgstr ""
+
+#: mstw-game-locations.php:400
+msgid "None (use address)"
+msgstr ""
+
+#: mstw-game-locations.php:413
+msgid "No Venue URL."
+msgstr ""
+
+#: mstw-game-locations.php:508
+msgid "Click on map to view driving directions."
+msgstr ""
+
+#: mstw-game-locations.php:587
+msgid "Custom Map"
+msgstr ""
+
+#: mstw-game-locations.php:729
+msgid "Column Visibility & Label Settings Settings"
+msgstr ""
+
+#: mstw-game-locations.php:738
+msgid "Show or hide the instructions above the table. (Default: Show)"
+msgstr ""
+
+#: mstw-game-locations.php:742
+msgid "Show Instructions:"
+msgstr ""
+
+#: mstw-game-locations.php:753
+msgid "Defaults to \"Click on map to view driving directions.\""
+msgstr ""
+
+#: mstw-game-locations.php:757
+msgid "Locations Table Instructions:"
+msgstr ""
+
+#: mstw-game-locations.php:768
+msgid ""
+"Set label for location column. (Default: \"Location). NOTE that this column "
+"cannot be hidden.\")"
+msgstr ""
+
+#: mstw-game-locations.php:772
+msgid "Location Column Label:"
+msgstr ""
+
+#: mstw-game-locations.php:787
+msgid ""
+"Either an address or a custom map URL must be specified to add a link to a "
+"map. A venue URL must be specified to add a link to a venue. (Default: No "
+"Link)"
+msgstr ""
+
+#: mstw-game-locations.php:791
+msgid "Add Link from Location:"
+msgstr ""
+
+#: mstw-game-locations.php:802
+msgid "Show or hide the Address column. (Default: Show)"
+msgstr ""
+
+#: mstw-game-locations.php:806
+msgid "Show Address Column:"
+msgstr ""
+
+#: mstw-game-locations.php:817
+msgid "Set label for address column. (Default: \"Address\")"
+msgstr ""
+
+#: mstw-game-locations.php:821
+msgid "Address Column Label:"
+msgstr ""
+
+#: mstw-game-locations.php:832
+msgid "Show or hide the Map column. (Default: Show)"
+msgstr ""
+
+#: mstw-game-locations.php:836
+msgid "Show Map Column:"
+msgstr ""
+
+#: mstw-game-locations.php:847
+msgid "Set label for map column. (Default: \"Map (Click for larger view)\")"
+msgstr ""
+
+#: mstw-game-locations.php:852
+msgid "Map Column Label:"
+msgstr ""
+
+#: mstw-game-locations.php:873
+msgid ""
+"Marker color on map in locations table. Standard Google Maps colors. "
+"(Default: Blue)"
+msgstr ""
+
+#: mstw-game-locations.php:877
+msgid "Map Marker Color:"
+msgstr ""
+
+#: mstw-game-locations.php:888
+msgid "Width in pixels (Default: 250)"
+msgstr ""
+
+#: mstw-game-locations.php:892
+msgid "Map icon width (in table):"
+msgstr ""
+
+#: mstw-game-locations.php:903
+msgid "Height in pixels (Default: 75)"
+msgstr ""
+
+#: mstw-game-locations.php:907
+msgid "Map icon height (in table):"
+msgstr ""
+
+#: mstw-game-locations.php:918
+msgid "Enter your game locations table settings. "
+msgstr ""

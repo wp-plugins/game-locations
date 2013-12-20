@@ -241,7 +241,7 @@
 		}
 		else {
 			$loop_array = $mstw_utl_date_formats;
-			$label =  __( 'foobar Formats for', 'mstw-loc-domain' ) . " " . __( '7 April 2013', 'mstw-loc-domain' );
+			$label =  __( 'Formats for', 'mstw-loc-domain' ) . " " . __( '7 April 2013', 'mstw-loc-domain' );
 		}
 		
 		echo "<select id='$id' name='$name' style='width: 160px' >";
@@ -290,13 +290,13 @@
 	function mstw_utl_time_format_ctrl( $args ) {
 		// need the $mstw_time_formats array
 		$mstw_utl_time_formats = array ( 
-			'Custom'		=> 'custom',
-			'08:00 (24hr)' 	=> 'H:i',
-			'8:00 (24hr)' 	=> 'G:i',
-			'08:00 am' 		=> 'h:i a',
-			'08:00 AM' 		=> 'h:i A',
-			'8:00 am' 		=> 'g:i a',
-			'8:00 AM' 		=> 'g:i A',
+			__( 'Custom', 'mstw-loc-domain' )			=> 'custom',
+			__( '08:00 (24hr)', 'mstw-loc-domain' ) 	=> 'H:i',
+			__( '8:00 (24hr)', 'mstw-loc-domain' ) 		=> 'G:i',
+			__( '08:00 am', 'mstw-loc-domain' ) 		=> 'h:i a',
+			__( '08:00 AM', 'mstw-loc-domain' ) 		=> 'h:i A',
+			__( '8:00 am', 'mstw-loc-domain' ) 			=> 'g:i a',
+			__( '8:00 AM', 'mstw-loc-domain' ) 			=> 'g:i A',
 			);
 		
 		/*if ( !isset( $mstw_time_formats ) ) {

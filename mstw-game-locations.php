@@ -36,6 +36,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //
 // -----------------------------------------------------------------------*/ 
 
+
+// ----------------------------------------------------------------
+	// Set up localization
+	//
+	add_action( 'init', 'mstw_gl_load_localization' );
+		
+	function mstw_gl_load_localization( ) {
+		load_plugin_textdomain( 'mstw-loc-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	} 
+	
 // ----------------------------------------------------------------
 // Deactivate, request upgrade, and exit if WP version is not right
 // ----------------------------------------------------------------
@@ -750,7 +760,7 @@ function mstw_gl_option_page() {
 		$args = array( 	'id' => 'gl_instructions',
 						'name'	=> 'mstw_gl_options[gl_instructions]',
 						'value'	=> $options['gl_instructions'],
-						'label'	=> __( 'Defaults to "Click on map to view driving directions."', 'mstw-loc-domain' )
+						'label'	=> __( 'Defaults to &quot;Click on map to view driving directions.&quot;', 'mstw-loc-domain' )
 						);						
 		add_settings_field(
 			'gl_instructions',
@@ -765,7 +775,7 @@ function mstw_gl_option_page() {
 		$args = array( 	'id' => 'location_label',
 						'name'	=> 'mstw_gl_options[location_label]',
 						'value'	=> $options['location_label'],
-						'label'	=> __( 'Set label for location column. (Default: "Location). NOTE that this column cannot be hidden.")', 'mstw-loc-domain' )
+						'label'	=> __( 'Set label for location column. (Default: &quot;Location&quot;). NOTE that this column cannot be hidden.)', 'mstw-loc-domain' )
 						);						
 		add_settings_field(
 			'gl_location_label',
@@ -814,7 +824,7 @@ function mstw_gl_option_page() {
 		$args = array( 	'id' => 'address_label',
 						'name'	=> 'mstw_gl_options[address_label]',
 						'value'	=> $options['address_label'],
-						'label'	=> __( 'Set label for address column. (Default: "Address")', 'mstw-loc-domain' )
+						'label'	=> __( 'Set label for address column. (Default: &quot;Address&quot;)', 'mstw-loc-domain' )
 						);						
 		add_settings_field(
 			'gl_address_label',
@@ -844,7 +854,7 @@ function mstw_gl_option_page() {
 		$args = array( 	'id' => 'map_label',
 						'name'	=> 'mstw_gl_options[map_label]',
 						'value'	=> $options['map_label'],
-						'label'	=> __( 'Set label for map column. (Default: "Map (Click for larger view)")', 'mstw-loc-domain' )
+						'label'	=> __( 'Set label for map column. (Default: &quot;Map (Click for larger view)&quot;)', 'mstw-loc-domain' )
 						//'label' => 'number_label: ' . $options['number_label'] . '::'
 						);						
 		add_settings_field(
