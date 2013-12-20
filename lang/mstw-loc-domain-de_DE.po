@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Game Locations\n"
+"POT-Creation-Date: 2013-12-18 20:23+0100\n"
+"PO-Revision-Date: 2013-12-18 20:23+0100\n"
+"Last-Translator: \n"
+"Language-Team: GERMAN\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: c:\\Users\\Mark\\Documents\\Shoal Summame-locations"
+"\\trunk\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../mstw-game-locations.php:248 ../mstw-game-locations.php:401
+msgid "Location"
+msgstr "Spielort"
+
+#: ../mstw-game-locations.php:249
+msgid "Street"
+msgstr "Straße"
+
+#: ../mstw-game-locations.php:250
+msgid "City"
+msgstr "Stadt"
+
+#: ../mstw-game-locations.php:251
+msgid "State"
+msgstr "Staat"
+
+#: ../mstw-game-locations.php:252
+msgid "Zip"
+msgstr "PLZ"
+
+#: ../mstw-game-locations.php:253
+msgid "Custom URL"
+msgstr "Eigendefinierte URL"
+
+#: ../mstw-game-locations.php:278
+msgid "No Street Address"
+msgstr "Keine Straßenadresse"
+
+#: ../mstw-game-locations.php:291
+msgid "No City"
+msgstr "Keine Stadt"
+
+#: ../mstw-game-locations.php:305
+msgid "No State"
+msgstr "Kein Staat"
+
+#: ../mstw-game-locations.php:318
+msgid "No Zip"
+msgstr "Kein PLZ"
+
+#: ../mstw-game-locations.php:331
+msgid "No URL, use address."
+msgstr "Keine URL, verwende Straßenadresse"
+
+#: ../mstw-game-locations.php:394
+msgid "Click on map to view driving directions."
+msgstr "Klicke auf die Karte, um die Route zu sehen."
+
+#: ../mstw-game-locations.php:402
+msgid "Address"
+msgstr "Adresse"
+
+#: ../mstw-game-locations.php:403
+msgid "Map"
+msgstr "Karte"
+
+#: ../mstw-game-locations.php:403
+msgid "Click for larger view"
+msgstr "Karte anklicken für größere Ansicht"
+
+#: ../mstw-game-locations.php:460
+msgid "Custom Map"
+msgstr "Bearbeitete Karte"
+
+#: ../mstw-game-locations.php:575
+msgid "Enter your game locations table settings. "
+msgstr "Gebe Deine Einstellungen für die Game Locations Tabelle ein."
+
+#: ../mstw-game-locations.php:575
+msgid ""
+"All color values are in hex, in the format 0x followed by six hex digits. "
+"For example, 0x123abd."
+msgstr ""
+"Alle Farben sind in Hexadezimal-Notation, im Format 0x gefolgt von sechs Hex-"
+"Zeichen. Beispiel: 0x123abd."
