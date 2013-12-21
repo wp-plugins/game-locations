@@ -3,7 +3,7 @@
 Plugin Name: Game Locations
 Plugin URI: http://wordpress.org/extend/plugins/game-locations/
 Description: The Game Locations Plugin defines a custom type - Game Locations - for use in the MySportTeamWebite framework. Generations driving directions (from Google Maps) based on the address.
-Version: 1.1
+Version: 1.2
 Author: Mark O'Donnell
 Author URI: http://shoalsummitsolutions.com
 */
@@ -45,6 +45,46 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	function mstw_gl_load_localization( ) {
 		load_plugin_textdomain( 'mstw-loc-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	} 
+	
+// ----------------------------------------------------------------
+// Add the custom MSTW icon to CPT pages
+// SOMETHING CHANGED IN 3.8 WITH THE ICONS ON PAGES
+/*	add_action('admin_head', 'mstw_gl_custom_css');
+	
+	function mstw_gl_custom_css() { ?>
+		<style type="text/css">
+			#icon-mstw-gs-main-menu.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#menu-posts-scheduled_game .wp-menu-image {
+				background-image: url(<?php echo plugins_url( '/game-locations/images/mstw-admin-menu-icon.png', 'game-locations' );?>) no-repeat 6px -17px !important;
+			}
+			
+			#icon-scheduled_game.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#icon-mstw_gs_teams.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#icon-mstw_gs_schedules.icon32 {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			
+			
+			
+			#icon-edit.icon32-posts-scheduled_games {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#icon-edit.icon32-posts-mstw_gs_teams {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			#icon-edit.icon32-posts-mstw_gs_schedules {
+				background: url(<?php echo plugins_url( '/game-locations/images/mstw-logo-32x32.png', 'game-locations' );?>) transparent no-repeat;
+			}
+			
+		</style>
+	<?php
+	}*/
 	
 // ----------------------------------------------------------------
 // Deactivate, request upgrade, and exit if WP version is not right
@@ -253,26 +293,30 @@ function mstw_gl_create_ui( $post ) {
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_state"><?php _e( 'State:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="128" size="30" name="mstw_gl_state" 
-        	value="<?php echo esc_attr( $mstw_gl_state ) ; ?>"/></td>
-		<td><?php _e( 'For US states use 2 letter abbreviation. Can include country, e.g, "WI, US", or use only country, e.g, "UK". Just check what works with Google Maps if you aren\'t using a custom map URL.', 'mstw-loc-domain' ); ?></td>
+        	value="<?php echo esc_attr( $mstw_gl_state ) ; ?>"/>
+		<br/>
+		<span class='description'><?php _e( 'For US states use 2 letter abbreviation. Can include country, e.g, "WI, US", or use only country, e.g, "UK". Just check what works with Google Maps if you aren\'t using a custom map URL.', 'mstw-loc-domain' ); ?></span></td>
     </tr>
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_zip"><?php _e( 'Zip:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="128" size="30" name="mstw_gl_zip" 
-        	value="<?php echo esc_attr( $mstw_gl_zip ); ?>"/></td>
-		<td><?php _e( 'Zip code or postal code.', 'mstw-loc-domain' ); ?></td>
+        	value="<?php echo esc_attr( $mstw_gl_zip ); ?>"/>
+		<br/>
+		<span class='description'><?php _e( 'Zip code or postal code.', 'mstw-loc-domain' ); ?></span></td>
     </tr>
     <tr valign="top">
     	<th scope="row"><label for="$mstw_gl_custom_url"><?php _e( 'Custom Map URL:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="256" size="30" name="mstw_gl_custom_url" 
-        	value="<?php echo esc_url( $mstw_gl_custom_url ); ?>"/></td>
-		<td><?php _e( 'Used to override the map generated from the address fields by Google Maps. Linked from the map thumbnail in the map column.', 'mstw-loc-domain' ); ?></td>
+        	value="<?php echo esc_url( $mstw_gl_custom_url ); ?>"/>
+		<br/>
+		<span class='description'><?php _e( 'Used to override the map generated from the address fields by Google Maps. Linked from the map thumbnail in the map column.', 'mstw-loc-domain' ); ?></span></td>
     </tr>
 	<tr valign="top">
     	<th scope="row"><label for="$mstw_gl_venue_url"><?php _e( 'Venue URL:', 'mstw-loc-domain' ); ?></label></th>
         <td><input maxlength="256" size="30" name="mstw_gl_venue_url" 
-        	value="<?php echo esc_url( $mstw_gl_venue_url ); ?>"/></td>
-		<td><?php _e( 'Link to the venue\'s website. Normally linked from the location/venue name column.', 'mstw-loc-domain' ); ?></td>
+        	value="<?php echo esc_url( $mstw_gl_venue_url ); ?>"/>
+		<br/>
+		<span class='description'><?php _e( 'Link to the venue\'s website. Normally linked from the location/venue name column.', 'mstw-loc-domain' ); ?></span></td>
     </tr>
 	
     </table>
