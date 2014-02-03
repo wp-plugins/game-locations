@@ -109,7 +109,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	// ----------------------------------------------------------------
 	if ( !function_exists( 'mstw_admin_utils_loaded' ) ) {
 		// we're in wp-admin
-		require_once ( dirname( __FILE__ ) . '/includes/mstw-admin-utils.php' );
+		require_once ( dirname( __FILE__ ) . '/includes/mstw-gl-admin-utils.php' );
     }
 	
 	// ----------------------------------------------------------------	
@@ -744,7 +744,7 @@ function mstw_gl_option_page() {
 	<div class="wrap">
 		<?php screen_icon(); ?>
 		<h2>Game Locations Plugin Settings</h2>
-		<?php //settings_errors(); ?>
+		<?php settings_errors( 'mstw_game_locations' ); ?>
 		<form action="options.php" method="post">
 			<?php settings_fields('mstw_gl_options'); ?>
 			<?php do_settings_sections('mstw_gl_settings'); ?>
@@ -794,7 +794,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'show_instructions',
 			__( 'Show Instructions:', 'mstw-loc-domain' ),
-			'mstw_utl_show_hide_ctrl',
+			'mstw_gl_show_hide_ctrl',
 			$display_on_page,  //mstw_gl_settings
 			$page_section,  //mstw_gl_column_settings
 			$args
@@ -809,7 +809,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_instructions',
 			__( 'Locations Table Instructions:', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -824,7 +824,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_location_label',
 			__( 'Location Column Label:', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -843,7 +843,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'location_link',
 			__( 'Add Link from Location:', 'mstw-loc-domain' ),
-			'mstw_utl_select_option_ctrl', 
+			'mstw_gl_select_option_ctrl', 
 			$display_on_page,
 			$page_section,
 			$args
@@ -858,7 +858,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_show_address',
 			__( 'Show Address Column:', 'mstw-loc-domain' ),
-			'mstw_utl_show_hide_ctrl',
+			'mstw_gl_show_hide_ctrl',
 			$display_on_page,  //mstw_gl_settings
 			$page_section,  //mstw_gl_column_settings
 			$args
@@ -873,7 +873,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_address_label',
 			__( 'Address Column Label:', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -888,7 +888,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'show_map',
 			__( 'Show Map Column:', 'mstw-loc-domain' ),
-			'mstw_utl_show_hide_ctrl',
+			'mstw_gl_show_hide_ctrl',
 			$display_on_page,  //mstw_gl_settings
 			$page_section,  //mstw_gl_column_settings
 			$args
@@ -904,7 +904,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_map_label',
 			__( 'Map Column Label:', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -929,7 +929,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_marker_color',
 			__( 'Map Marker Color:', 'mstw-loc-domain' ),
-			'mstw_utl_select_option_ctrl', 
+			'mstw_gl_select_option_ctrl', 
 			$display_on_page,
 			$page_section,
 			$args
@@ -944,7 +944,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_map_width',
 			__( 'Map icon width (in table):', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -959,7 +959,7 @@ function mstw_gl_option_page() {
 		add_settings_field(
 			'gl_map_height',
 			__( 'Map icon height (in table):', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
+			'mstw_gl_text_ctrl',
 			$display_on_page,
 			$page_section,
 			$args
@@ -991,7 +991,7 @@ function mstw_gl_validate_options( $input ) {
 				// add the hex colors
 				case 'none_right_now':
 					// validate the color for proper hex format
-					$sanitized_color = mstw_utl_sanitize_hex_color( $input[$key] );
+					$sanitized_color = mstw_gl_sanitize_hex_color( $input[$key] );
 					
 					// decide what to do - save new setting 
 					// or display error & revert to last setting
@@ -1030,14 +1030,6 @@ function mstw_gl_validate_options( $input ) {
 	
 	return apply_filters( 'mstw_gl_validate_filters', $output, $input );
 }
-
-//--------------------------------------------------------------
-//	Display the admin notices
-//
-	function mstw_gl_admin_notices( ) {
-		settings_errors( );
-	}
-	add_action( 'admin_notices', 'mstw_gl_admin_notices' );
 
 //--------------------------------------------------------------
 // Get the default display options
