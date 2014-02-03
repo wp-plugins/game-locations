@@ -89,6 +89,11 @@ Upgrading to this version of Game Locations should not impact any existing locat
 
 == Changelog ==
 
+= 1.3 =
+* Cleaned up name space collisions in the admin utils for the MSTW Framework. PREVIOUS VERSIONS WILL NOT WORK WITH THE MSTW FRAMEWORK.
+* Added a tag (mstw_game_locations) to the settings_errors() call to eliminate multiple 'Settings Saved.' messages.
+* 
+
 = 1.2 =
 * Completed internationalized the admin pages. The default .po and .mo files have been updated and are in the /lang directory.
 * A new "Venue URL" data field was added. It provides a link the the location/venue's web page, NOT MAP, from the venue name, NOT MAP ICON, in the shortcode table.
