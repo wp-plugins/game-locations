@@ -1,93 +1,421 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Game Locations\n"
-"POT-Creation-Date: 2013-12-18 20:23+0100\n"
-"PO-Revision-Date: 2013-12-18 20:23+0100\n"
-"Last-Translator: \n"
-"Language-Team: GERMAN\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/game-locations\n"
+"POT-Creation-Date: 2013-12-20 04:31:05+00:00\n"
+"PO-Revision-Date: Tue Feb 11 2014 21:05:58 GMT+0100 (Mitteleuropäische Zeit)\n"
+"Last-Translator: Anders Lind <lind@erding-mallards.de>\n"
+"Language-Team: mallard66\n"
 "Language: German\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
-"X-Poedit-KeywordsList: _e;__\n"
-"X-Poedit-Basepath: c:\\Users\\Mark\\Documents\\Shoal Summame-locations"
-"\\trunk\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;__:1;"
+"_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;_x:1,2c;"
+"_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;esc_attr__:1;"
+"esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;esc_html_x:1,2c;"
+"comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: de_DE"
 
-#: ../mstw-game-locations.php:248 ../mstw-game-locations.php:401
+#: ../mstw-game-locations.php:102
+msgid ""
+"requires WordPress 3.3 or higher, and has been deactivated! Please upgrade "
+"WordPress and try again."
+msgstr ""
+"benötigt WordPress 3.3 oder höher und wurde deaktiviert! Bitte WordPress "
+"aktualisieren und wieder versuchen."
+
+#: ../mstw-game-locations.php:102
+msgid "Back to"
+msgstr "Zurück zu"
+
+#: ../mstw-game-locations.php:102
+msgid "WordPress admin"
+msgstr "WordPress Administration"
+
+#: ../mstw-game-locations.php:225
+msgid "Game Locations"
+msgstr "Austragungsorte"
+
+#: ../mstw-game-locations.php:226
+msgid "Game Location"
+msgstr "Austragungsort"
+
+#: ../mstw-game-locations.php:227
+msgid "All Locations"
+msgstr "Alle Orte"
+
+#: ../mstw-game-locations.php:228
+msgid "Add New Location"
+msgstr "Neuer Ort hinzufügen"
+
+#: ../mstw-game-locations.php:229
+msgid "Add Location"
+msgstr "Ort hinzufügen"
+
+#: ../mstw-game-locations.php:230
+msgid "Edit Location"
+msgstr "Ort bearbeiten"
+
+#: ../mstw-game-locations.php:231
+msgid "New Location"
+msgstr "Neuer Ort"
+
+#: ../mstw-game-locations.php:234
+msgid "Search Game Locations"
+msgstr "Nach Austragungsorte suchen"
+
+#: ../mstw-game-locations.php:235
+msgid "No Locations Found"
+msgstr "Keine Orte gefunden"
+
+#: ../mstw-game-locations.php:236
+msgid "No Locations Found In Trash"
+msgstr "Keine Orte im Papierkorb gefunden"
+
+#: ../mstw-game-locations.php:284
+msgid "Street Address:"
+msgstr "Straßenadresse:"
+
+#: ../mstw-game-locations.php:289
+msgid "City:"
+msgstr "Stadt:"
+
+#: ../mstw-game-locations.php:294
+msgid "State:"
+msgstr "Land/Staat:"
+
+#: ../mstw-game-locations.php:298
+msgid ""
+"For US states use 2 letter abbreviation. Can include country, e.g, \"WI, US\", or "
+"use only country, e.g, \"UK\". Just check what works with Google Maps if you "
+"aren't using a custom map URL."
+msgstr ""
+"Für Orte in die USA, verwende die 2-Buchstaben-Abkürzung; Staat kann "
+"hinzugefügt werden (z.B.  \"WI, US\"), oder nur einen Staat (z.B. \"UK\"). Einfach "
+"in Google Maps ausprobieren was funktioniert, falls du keinen eigenen Karten-"
+"Link verwendest."
+
+#: ../mstw-game-locations.php:301
+msgid "Zip:"
+msgstr "PLZ:"
+
+#: ../mstw-game-locations.php:305
+msgid "Zip code or postal code."
+msgstr "US-Zip oder Postleitzahl."
+
+#: ../mstw-game-locations.php:308
+msgid "Custom Map URL:"
+msgstr "Eigener Karten-Link:"
+
+#: ../mstw-game-locations.php:312
+msgid ""
+"Used to override the map generated from the address fields by Google Maps. "
+"Linked from the map thumbnail in the map column."
+msgstr ""
+"Wird verwendet statt der Karte von der Adresse abgeleitete Google-Maps-Karte. "
+"Verlinkt vom Karten-Miniaturbild in der Karten-Spalte."
+
+#: ../mstw-game-locations.php:315
+msgid "Venue URL:"
+msgstr "Link zum Veranstalter:"
+
+#: ../mstw-game-locations.php:319
+msgid ""
+"Link to the venue's website. Normally linked from the location/venue name "
+"column."
+msgstr ""
+"Link zur Homepage des Veranstalters. Normalerweise verlinkt von der "
+"Ort/Veranstalter-Spalte."
+
+#: ../mstw-game-locations.php:371
 msgid "Location"
-msgstr "Spielort"
+msgstr "Austragungsort"
 
-#: ../mstw-game-locations.php:249
+#: ../mstw-game-locations.php:372
 msgid "Street"
 msgstr "Straße"
 
-#: ../mstw-game-locations.php:250
+#: ../mstw-game-locations.php:373
 msgid "City"
 msgstr "Stadt"
 
-#: ../mstw-game-locations.php:251
+#: ../mstw-game-locations.php:374
 msgid "State"
-msgstr "Staat"
+msgstr "Land/Staat"
 
-#: ../mstw-game-locations.php:252
+#: ../mstw-game-locations.php:375
 msgid "Zip"
 msgstr "PLZ"
 
-#: ../mstw-game-locations.php:253
-msgid "Custom URL"
-msgstr "Eigendefinierte URL"
+#: ../mstw-game-locations.php:376
+msgid "Custom Map URL"
+msgstr "Eigener Karten-Link"
 
-#: ../mstw-game-locations.php:278
+#: ../mstw-game-locations.php:377
+msgid "Venue URL"
+msgstr "Veranstalter-Link"
+
+#: ../mstw-game-locations.php:401
 msgid "No Street Address"
 msgstr "Keine Straßenadresse"
 
-#: ../mstw-game-locations.php:291
+#: ../mstw-game-locations.php:414
 msgid "No City"
 msgstr "Keine Stadt"
 
-#: ../mstw-game-locations.php:305
+#: ../mstw-game-locations.php:428
 msgid "No State"
-msgstr "Kein Staat"
+msgstr "Kein Land/Staat"
 
-#: ../mstw-game-locations.php:318
+#: ../mstw-game-locations.php:441
 msgid "No Zip"
-msgstr "Kein PLZ"
+msgstr "Keine PLZ"
 
-#: ../mstw-game-locations.php:331
-msgid "No URL, use address."
-msgstr "Keine URL, verwende Straßenadresse"
+#: ../mstw-game-locations.php:454
+msgid "None (use address)"
+msgstr "Kein (Adresse verwenden)"
 
-#: ../mstw-game-locations.php:394
+#: ../mstw-game-locations.php:467
+msgid "No Venue URL."
+msgstr "Kein Veranstalter-Link."
+
+#: ../mstw-game-locations.php:562
 msgid "Click on map to view driving directions."
-msgstr "Klicke auf die Karte, um die Route zu sehen."
+msgstr "Karte anklicken für Anfahrt."
 
-#: ../mstw-game-locations.php:402
-msgid "Address"
-msgstr "Adresse"
-
-#: ../mstw-game-locations.php:403
-msgid "Map"
-msgstr "Karte"
-
-#: ../mstw-game-locations.php:403
-msgid "Click for larger view"
-msgstr "Karte anklicken für größere Ansicht"
-
-#: ../mstw-game-locations.php:460
+#: ../mstw-game-locations.php:641
 msgid "Custom Map"
-msgstr "Bearbeitete Karte"
+msgstr "Link zur Karte"
 
-#: ../mstw-game-locations.php:575
-msgid "Enter your game locations table settings. "
-msgstr "Gebe Deine Einstellungen für die Game Locations Tabelle ein."
+#: ../mstw-game-locations.php:783
+msgid "Column Visibility & Label Settings Settings"
+msgstr "Einstellung der Spalten-Darstellung und Beschriftung"
 
-#: ../mstw-game-locations.php:575
+#: ../mstw-game-locations.php:792
+msgid "Show or hide the instructions above the table. (Default: Show)"
+msgstr "Die Anweisungen über der Tabelle anzeigen oder verstecken (Vorgabe: anzeigen)"
+
+#: ../mstw-game-locations.php:796
+msgid "Show Instructions:"
+msgstr "Anweisungen anzeigen:"
+
+#: ../mstw-game-locations.php:807
+msgid "Defaults to &quot;Click on map to view driving directions.&quot;"
+msgstr "Vorgabe: &quot;Click on map to view driving directions.&quot;"
+
+#: ../mstw-game-locations.php:811
+msgid "Locations Table Instructions:"
+msgstr "Anweisungen für die Austragungsort-Tabelle:"
+
+#: ../mstw-game-locations.php:822
 msgid ""
-"All color values are in hex, in the format 0x followed by six hex digits. "
-"For example, 0x123abd."
+"Set label for location column. (Default: &quot;Location&quot;). NOTE that this "
+"column cannot be hidden.)"
 msgstr ""
-"Alle Farben sind in Hexadezimal-Notation, im Format 0x gefolgt von sechs Hex-"
-"Zeichen. Beispiel: 0x123abd."
+"Beschriftung für Austragungsort-Spalte festlegen. (Vorgabe: &quot;Location&quot;"
+"). BEMERKE: diese Spalte kann nicht ausgeblendet werden.)"
+
+#: ../mstw-game-locations.php:826
+msgid "Location Column Label:"
+msgstr "Beschriftung Austragungsort-Spalte:"
+
+#: ../mstw-game-locations.php:841
+msgid ""
+"Either an address or a custom map URL must be specified to add a link to a map. "
+"A venue URL must be specified to add a link to a venue. (Default: No Link)"
+msgstr ""
+"Entweder eine Adresse oder einen eigenen Karten-Link muss eingegeben werden, "
+"damit ein Karten-Link verfügbar wird. Ein Veranstalter-Link kann eingegeben "
+"werden und wird dann angezeigt (Vorgabe: kein Link)"
+
+#: ../mstw-game-locations.php:845
+msgid "Add Link from Location:"
+msgstr "Link zum Veranstalter eingeben:"
+
+#: ../mstw-game-locations.php:856
+msgid "Show or hide the Address column. (Default: Show)"
+msgstr "Die Adressen-Spalte anzeigen oder verstecken. (Vorgabe: anzeigen)"
+
+#: ../mstw-game-locations.php:860
+msgid "Show Address Column:"
+msgstr "Adressen-Spalte anzeigen:"
+
+#: ../mstw-game-locations.php:871
+msgid "Set label for address column. (Default: &quot;Address&quot;)"
+msgstr "Beschriftung für Adressen-Spalte festlegen. (Vorgabe: &quot;Address&quot;)"
+
+#: ../mstw-game-locations.php:875
+msgid "Address Column Label:"
+msgstr "Beschriftung Adressen-Spalte:"
+
+#: ../mstw-game-locations.php:886
+msgid "Show or hide the Map column. (Default: Show)"
+msgstr "Karten-Spalte anzeigen oder verstecken. (Vorgabe: anzeigen)"
+
+#: ../mstw-game-locations.php:890
+msgid "Show Map Column:"
+msgstr "Karten-Spalte anzeigen:"
+
+#: ../mstw-game-locations.php:901
+msgid "Set label for map column. (Default: &quot;Map (Click for larger view)&quot;)"
+msgstr ""
+"Beschriftung für Kartenspalte festlegen. (Vorgabe: &quot;Map (Click for larger "
+"view)&quot;)"
+
+#: ../mstw-game-locations.php:906
+msgid "Map Column Label:"
+msgstr "Beschriftung Karten-Spalte:"
+
+#: ../mstw-game-locations.php:927
+msgid ""
+"Marker color on map in locations table. Standard Google Maps colors. (Default: "
+"Blue)"
+msgstr ""
+"Farbe der Markierung in Karten in der Karten-Spalte. Nur die Google Maps "
+"Standardfarben können verwendet werden. (Vorgabe: Blue)"
+
+#: ../mstw-game-locations.php:931
+msgid "Map Marker Color:"
+msgstr "Farbe der Karten-Markierung:"
+
+#: ../mstw-game-locations.php:942
+msgid "Width in pixels (Default: 250)"
+msgstr "Breite in Pixel (Vorgabe: 250)"
+
+#: ../mstw-game-locations.php:946
+msgid "Map icon width (in table):"
+msgstr "Breite Karten-Miniaturbild (in der Tabelle):"
+
+#: ../mstw-game-locations.php:957
+msgid "Height in pixels (Default: 75)"
+msgstr "Höhe in Pixel (Vorgabe: 75)"
+
+#: ../mstw-game-locations.php:961
+msgid "Map icon height (in table):"
+msgstr "Höhe Karten-Miniaturbild (in der Tabelle):"
+
+#: ../mstw-game-locations.php:972
+msgid "Enter your game locations table settings. "
+msgstr "Gib deine Einstellungen für die Austragungsort-Tabelle ein."
+
+#: ../includes/mstw-admin-utils.php:138
+msgid "Show"
+msgstr "Anzeigen"
+
+#: ../includes/mstw-admin-utils.php:139
+msgid "Hide"
+msgstr "Verstecken"
+
+#: ../includes/mstw-admin-utils.php:212 ../includes/mstw-admin-utils.php:214
+msgid "7 Apr 2013"
+msgstr "7. Apr 2013"
+
+#: ../includes/mstw-admin-utils.php:213 ../includes/mstw-admin-utils.php:215 ../includes/mstw-admin-utils.php:216
+msgid "07 Apr 2013"
+msgstr "07. Apr 2013"
+
+#: ../includes/mstw-admin-utils.php:217
+msgid "Tues, 07 Apr 2013"
+msgstr "Di, 07. Apr 2013"
+
+#: ../includes/mstw-admin-utils.php:218
+msgid "Tues, 7 Apr 13"
+msgstr "Di, 7. Apr 13"
+
+#: ../includes/mstw-admin-utils.php:219 ../includes/mstw-admin-utils.php:220
+msgid "Tuesday, 07 April 2013"
+msgstr "Dienstag, 07. April 2013"
+
+#: ../includes/mstw-admin-utils.php:221
+msgid "Tuesday, 07 Apr"
+msgstr "Dienstag, 07. Apr"
+
+#: ../includes/mstw-admin-utils.php:222
+msgid "Tues, 7 Apr"
+msgstr "Di, 7. Apr"
+
+#: ../includes/mstw-admin-utils.php:223
+msgid "7 Apr"
+msgstr "7. Apr"
+
+#: ../includes/mstw-admin-utils.php:224
+msgid "07 Apr"
+msgstr "07. Apr"
+
+#: ../includes/mstw-admin-utils.php:228
+msgid "Tuesday, 07 April 01:15 pm"
+msgstr "Dienstag, 07. April 01:15 pm"
+
+#: ../includes/mstw-admin-utils.php:229
+msgid "Tuesday, 7 April 1:15 pm"
+msgstr "Dienstag, 7. April 1:15 pm"
+
+#: ../includes/mstw-admin-utils.php:230
+msgid "Tuesday, 07 April 13:15"
+msgstr "Dienstag, 07. April 13:15"
+
+#: ../includes/mstw-admin-utils.php:231
+msgid "Tuesday, 7 April 13:15"
+msgstr "Dienstag, 7. April 13:15"
+
+#: ../includes/mstw-admin-utils.php:232
+msgid "07 April 13:15"
+msgstr "07. April 13:15"
+
+#: ../includes/mstw-admin-utils.php:233
+msgid "7 April 13:15"
+msgstr "7. April 13:15"
+
+#: ../includes/mstw-admin-utils.php:234
+msgid "07 April 01:15 pm"
+msgstr "07. April 01:15 pm"
+
+#: ../includes/mstw-admin-utils.php:235
+msgid "7 April 01:15 pm"
+msgstr "7. April 01:15 pm"
+
+#: ../includes/mstw-admin-utils.php:240 ../includes/mstw-admin-utils.php:244 ../includes/mstw-admin-utils.php:322
+msgid "Formats for"
+msgstr "Formate für"
+
+#: ../includes/mstw-admin-utils.php:240
+msgid "7 April 2013 13:15"
+msgstr "7. April 2013 13:15"
+
+#: ../includes/mstw-admin-utils.php:244
+msgid "7 April 2013"
+msgstr "7. April 2013"
+
+#: ../includes/mstw-admin-utils.php:293
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#: ../includes/mstw-admin-utils.php:294
+msgid "08:00 (24hr)"
+msgstr "08:00 (24h)"
+
+#: ../includes/mstw-admin-utils.php:295
+msgid "8:00 (24hr)"
+msgstr "8:00 (24h)"
+
+#: ../includes/mstw-admin-utils.php:296
+msgid "08:00 am"
+msgstr "08:00 am"
+
+#: ../includes/mstw-admin-utils.php:297
+msgid "08:00 AM"
+msgstr "08:00 AM"
+
+#: ../includes/mstw-admin-utils.php:298
+msgid "8:00 am"
+msgstr "8:00 am"
+
+#: ../includes/mstw-admin-utils.php:299
+msgid "8:00 AM"
+msgstr "8:00 AM"
