@@ -109,7 +109,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	// ----------------------------------------------------------------
 	if ( !function_exists( 'mstw_admin_utils_loaded' ) ) {
 		// we're in wp-admin
-		require_once ( dirname( __FILE__ ) . '/includes/mstw-gl-admin-utils.php' );
+		require_once ( dirname( __FILE__ ) . '/includes/mstw-admin-utils.php' );
     }
 	
 	// ----------------------------------------------------------------	
