@@ -599,7 +599,9 @@ function mstw_gl_manage_columns( $column, $post_id ) {
 				
 				// column2: create the address in a pretty format
 				if ( $show_address ) {
-					$row_string .= $row_td . get_post_meta( $post->ID, '_mstw_gl_street', true ) . '<br/>' . 
+					$street = get_post_meta( $post->ID, '_mstw_gl_street', true );
+					$street_string = ( $street != '' ? $street . '<br/>' : '' );
+					$row_string .= $row_td . $street_string . 
 						get_post_meta( $post->ID, '_mstw_gl_city', true ) . ', ' .
 						get_post_meta( $post->ID, '_mstw_gl_state', true ) . '  ' . 
 						get_post_meta( $post->ID, '_mstw_gl_zip', true ) . '</td>';

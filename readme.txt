@@ -10,7 +10,7 @@ Domain Path: /lang
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides a table of locations with automatic links to a Google map for each one. Custom links can also be created.
+Provides a table of event venues with automatic links to Google maps. Custom map links can also be created.
 
 == Description ==
 
@@ -94,6 +94,7 @@ Upgrading to this version of Game Locations should not impact any existing locat
 = 1.3 =
 * Cleaned up name space collisions in the admin utils for the MSTW Framework. PREVIOUS VERSIONS WILL NOT WORK WITH THE MSTW FRAMEWORK.
 * Added a tag (mstw_game_locations) to the settings_errors() call to eliminate multiple 'Settings Saved.' messages.
+* Removed (blank) street address line in table if no street address is provided.
 
 = 1.2 =
 * Completed internationalized the admin pages. The default .po and .mo files have been updated and are in the /lang directory.
