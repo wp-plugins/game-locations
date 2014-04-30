@@ -3,7 +3,7 @@ Contributors: MarkODonnell
 Donate link: http://shoalsummitsolutions.com
 Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.2
 Text Domain: mstw-loc-domain
 Domain Path: /lang
@@ -14,17 +14,19 @@ Provides a table of locations with automatic links to a Google map for each one.
 
 == Description ==
 
-The MSTW Game Locations plugin creates a table of locations (screenshot-3) with links to maps for each one. It creates a custom post type, game_locations, installs an editor for this post type, and provides a shortcode, [mstw_gl_table], to display the custom posts.
+The MSTW Game Locations plugin is more appropriately named "Event Venues". It creates a table of locations/venues with links to maps for each one. The table is displayed via a simple shortcode, [mstw_gl_table].
 
-Use the Add/Edit Game Location screen (screenshot-2) to enter the Location (as the title), the street address, city, state, and zip. The plug-in builds the link to that location on Google Maps for display through the Game Locations table. The Custom URL field can be used to replace the Google Map generated from the address fields, which is linked from the map thumbnail in the map column.(See FAQ #2.)
+Use the Add/Edit Game Location screen to enter the Location (as the title), the street address, city, state, and zip. The plug-in builds the link to that location on Google Maps for display through the Game Locations table. The Custom URL field can be used to replace the Google Map generated from the address fields, which is linked from the map thumbnail in the map column.(See FAQ #2.)
+
+Check out the plugin in action on [the MSTW development and test site](http://shoalsummitsolutions.com/dev/).
+
+Complete documentation is available on [the Shoal Summit Solutions site](http://shoalsummitsolutions.com/category/users-manuals/gl-plugin/).
 
 **Notes:**
 
-* The references are to "game locations", only because that was original purpose of the plugin. However, perhaps "Game Venue" is a better term, and in fact the plugin works for any type of location - schools, churches, businesses, whatever.
+* The references are to "game locations", only because that was original purpose of the plugin. However, perhaps "Event Venue" is a better term, and in fact the plugin works for any type of location - schools, churches, businesses, whatever.
 
-* The current version of Game Locations has been tested on WP 3.8 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
-
-* In version 1.1, the table was changed to provide a third column with a "thumbnail" icon of the map (for default Google Maps) and a link from it to the map URL. This is (hopefully) graphically more appealing, but the core functionality is really unchanged. A Settings page was added to the Admin Dashboard to support a few styling options (screenshot-4), particularly for the mail thumbnail in the table, but most styling must be done in the plugin's stylesheet.
+* The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
 * The Game Locations plugin is the first in a set of plugins supporting the MSTW Framework for sports team websites. Others currently include Coaching Staffs, Game Schedules, Team Rosters, and League Standings.
 
@@ -47,7 +49,7 @@ The *MANUAL* way:
 4. Place the shortcode [mstw_gl_table] on the page(s) where you want the locations table to appear. (Be sure to use the editor's HTML tab, not the Visual tab.)
 
 **UPGRADING**
-Upgrading to this version of Game Locations should not impact any existing locations, however move any customizations made to the plugin stylesheet, because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
+Upgrading to this version of Game Locations should not impact any existing locations in the WP DB, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
 
 == Frequently Asked Questions ==
 
@@ -65,7 +67,7 @@ Use the custom URL field, then the title will display but won't be used in the G
 
 = Is this plugin ready for translation? =
 
-Yes. As of version 1.1. Contact me if you would like help creating a translation in your language. (A bug preventing translation was fixed in version 1.2.)
+Yes. A bug preventing translation was fixed in version 1.2. Contact me if you would like help creating a translation in your language. 
 
 == Screenshots ==
 
@@ -82,9 +84,9 @@ More complete documentation is available on [the Shoal Summit Solutions site](ht
 
 == Upgrade Notice ==
 
-The current version of Game Locations has been tested on WP 3.8 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
+The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
-Upgrading to this version of Game Locations should not impact any existing locations, however move any customizations made to the plugin stylesheet, because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
+Upgrading to this version of Game Locations should not impact any existing locations, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
 
 
 == Changelog ==
@@ -92,7 +94,6 @@ Upgrading to this version of Game Locations should not impact any existing locat
 = 1.3 =
 * Cleaned up name space collisions in the admin utils for the MSTW Framework. PREVIOUS VERSIONS WILL NOT WORK WITH THE MSTW FRAMEWORK.
 * Added a tag (mstw_game_locations) to the settings_errors() call to eliminate multiple 'Settings Saved.' messages.
-* 
 
 = 1.2 =
 * Completed internationalized the admin pages. The default .po and .mo files have been updated and are in the /lang directory.
