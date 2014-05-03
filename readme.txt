@@ -4,7 +4,7 @@ Donate link: http://shoalsummitsolutions.com
 Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
 Tested up to: 3.9
-Stable tag: 1.2
+Stable tag: 1.3
 Text Domain: mstw-loc-domain
 Domain Path: /lang
 License: GPLv2 or later
@@ -14,13 +14,21 @@ Provides a table of event venues with automatic links to Google maps. Custom map
 
 == Description ==
 
-The MSTW Game Locations plugin is more appropriately named "Event Venues". It creates a table of locations/venues with links to maps for each one. The table is displayed via a simple shortcode, [mstw_gl_table].
+The MSTW Game Locations plugin is more appropriately named "Event Venues". It creates a table of locations/venues with links to maps for each one. The table is displayed via a simple shortcode, [mstw_gl_table]. Use the Add/Edit Game Location screen to enter the Location (as the title), the street address, city, state, and zip. The plug-in generates the link to that location on Google Maps from the street address, city, state, and zip. A Custom URL can be used to replace the link to Google Maps.
 
-Use the Add/Edit Game Location screen to enter the Location (as the title), the street address, city, state, and zip. The plug-in builds the link to that location on Google Maps for display through the Game Locations table. The Custom URL field can be used to replace the Google Map generated from the address fields, which is linked from the map thumbnail in the map column.(See FAQ #2.)
+= NEW IN VERSION 1.3 =
 
-Check out the plugin in action on [the MSTW development and test site](http://shoalsummitsolutions.com/dev/).
+Version 1.3 is a maintenance release. Some namespace collisions with other MSTW plugins were eliminated. Please read the release notes for more information.
 
-Complete documentation is available on [the Shoal Summit Solutions site](http://shoalsummitsolutions.com/category/users-manuals/gl-plugin/).
+= Notes =
+
+* The Game Locations plugin is part of the My Sports Team Website (MSTW) framework for sports team and league websites. Others include Game Schedules, Team Rosters, Coaching Staffs, and League Standings, which are all available on [WordPress.org](http://wordpress.org/extend/plugins). [Learn more about MSTW](http://shoalsummitsolutions.com/my-sports-team-website/).
+
+
+= Helpful Links =
+* [**See what the plugin and do for your website on the MSTW Dev Site -»**](http://dev.shoalsummitsolutions.com/)
+* [**Read the user's manual at shoalsummitsolutions.com -»**](http://shoalsummitsolutions.com/category/gl-plugin)
+
 
 **Notes:**
 
@@ -32,42 +40,20 @@ Complete documentation is available on [the Shoal Summit Solutions site](http://
 
 == Installation ==
 
-The *AUTOMATED* way:
+**IMPORTANT!**
 
-1. Go to the Plugins->Installed plugins page in WordPress Admin.
-2. Click on Add New.
-3. Search for Game Locations.
-4. Click Install Now.
-5. Activate the plugin.
-6. Use the new Games menu to create and manage your schedules.
+*If you are upgrading, please read the upgrade notes. You shouldn't lose schedule data but you COULD easily lose and changes you've made to the plugin stylesheet.*
 
-The *MANUAL* way:
 
-1. Copy the entire /mstw-game-locations/ directory into your /wp-content/plugins/ directory.
-2. Activate the plugin.
-3. Enter your locations.
-4. Place the shortcode [mstw_gl_table] on the page(s) where you want the locations table to appear. (Be sure to use the editor's HTML tab, not the Visual tab.)
+All the normal installation methods for WordPress plugins work:
 
-**UPGRADING**
-Upgrading to this version of Game Locations should not impact any existing locations in the WP DB, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
+1. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Search for Game Locations. Install it.
+2. Download the plugin (.zip file) from WordPress.org. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Click on the Upload link. Find the downloaded .zip file on your computer. Install it.
+3. Download the plugin (.zip file) from WordPress.org. Unzip the file. Upload the extracted plugin folder to your website's wp-content/plugins directory using an FTP client or your hosting provider's file manager app. Activate it on the Plugins->Installed plugins screen in WordPress Admin.
 
 == Frequently Asked Questions ==
 
-= How do I change the look of the locations table? =
-
-Edit the plugin's stylesheet, mstw-gl-styles.css, located in game-locations/css. It is short, simple, and well documented. A Display Settings admin screen provides control of a few elements, especially the map thumbnails in the table. (See the Other Notes section.)
-
-= I don't really like Google Maps. Can I use other mapping service? =
-
-Yes. The custom URL field is provided for that purpose. An entry in that field will override the location's address information. The user will be directed to the link in the custom URL field. For example, this field can be used in the rare event that an address is too new for Google Maps, or to provide MapQuest maps in place of Google maps, or to spruce up the Google maps to show driving directions from a particular point and the route outline on the map.
-
-= I use names for locations that sometimes aren't recognized by Google. What should I do? =
-
-Use the custom URL field, then the title will display but won't be used in the Google address.  
-
-= Is this plugin ready for translation? =
-
-Yes. A bug preventing translation was fixed in version 1.2. Contact me if you would like help creating a translation in your language. 
+[The FAQs may be found here.](http://shoalsummitsolutions.com/gl-faq/)
 
 == Screenshots ==
 
@@ -76,17 +62,11 @@ Yes. A bug preventing translation was fixed in version 1.2. Contact me if you wo
 3. Game Location Table (from shortcode)
 4. The Settings Screen
 
-== Other Notes ==
-
-A demo of the plugin is available on [the MSTW development and test site](http://shoalsummitsolutions.com/dev/).
-
-More complete documentation is available on [the Shoal Summit Solutions site](http://shoalsummitsolutions.com/).
-
 == Upgrade Notice ==
 
 The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
-Upgrading to this version of Game Locations should not impact any existing locations, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
+Upgrading to this version of Game Locations should not impact any existing data, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
 
 
 == Changelog ==
