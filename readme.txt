@@ -3,84 +3,85 @@ Contributors: MarkODonnell
 Donate link: http://shoalsummitsolutions.com
 Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
-Tested up to: 3.5
-Stable tag: 1.1
+Tested up to: 3.9
+Stable tag: 1.3
+Text Domain: mstw-loc-domain
+Domain Path: /lang
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides a table of locations with automatic links to a Google map for each one. Custom links can also be created.
+Provides a table of event venues with automatic links to Google maps. Custom map links can also be created.
 
 == Description ==
 
-This is a simple plugin to create a list (table) of locations (screenshot-4) with links to maps to each one. It creates a custom post type, game_locations, installs an editor for this post type, and provides a shortcode, [mstw_gl_table], to display the custom posts.
+The MSTW Game Locations plugin is more appropriately named "Event Venues". It creates a table of locations/venues with links to maps for each one. The table is displayed via a simple shortcode, [mstw_gl_table]. Use the Add/Edit Game Location screen to enter the Location (as the title), the street address, city, state, and zip. The plug-in generates the link to that location on Google Maps from the street address, city, state, and zip. A Custom URL can be used to replace the link to Google Maps.
 
-Use the Edit Game Location screen (screenshot-2) to enter the Location (as the title), the street address, city, state, and zip. The plug-in builds the link to that location on Google Maps for display through the Game Locations table. The Custom URL field is normally not needed and therefore left blank. (See FAQ #2.)
+= NEW IN VERSION 1.3 =
+
+Version 1.3 is a maintenance release. Some namespace collisions with other MSTW plugins were eliminated. Please read the release notes for more information.
+
+= Notes =
+
+* The Game Locations plugin is part of the My Sports Team Website (MSTW) framework for sports team and league websites. Others include Game Schedules, Team Rosters, Coaching Staffs, and League Standings, which are all available on [WordPress.org](http://wordpress.org/extend/plugins). [Learn more about MSTW](http://shoalsummitsolutions.com/my-sports-team-website/).
+
+
+= Helpful Links =
+* [**See what the plugin and do for your website on the MSTW Dev Site -»**](http://dev.shoalsummitsolutions.com/)
+* [**Read the user's manual at shoalsummitsolutions.com -»**](http://shoalsummitsolutions.com/category/gl-plugin)
+
 
 **Notes:**
 
-* The references are to "game locations", only because that was original purpose of the plugin. However, it works for any type of location - schools, churches, businesses, whatever.
+* The references are to "game locations", only because that was original purpose of the plugin. However, perhaps "Event Venue" is a better term, and in fact the plugin works for any type of location - schools, churches, businesses, whatever.
 
-* In version 1.1, the table was changed to provide a third column with a "thumbnail" icon of the map (for default Google Maps) and a link from it to the map URL. This is (hopefully) graphically more appealing, but the core functionality is really unchanged. A Settings page was added to the Admin Dashboard to support a few styling options (screenshot-4), particularly for the mail thumbnail in the table, but most styling must be done in the plugin's stylesheet.
+* The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
-* The Game Locations plugin is the first in a set of nine plugins supporting a framework for sports team websites. Others will include Game Schedules, Team Rosters, Coaching Staffs, Sponsors, plus more.
+* The Game Locations plugin is the first in a set of plugins supporting the MSTW Framework for sports team websites. Others currently include Coaching Staffs, Game Schedules, Team Rosters, and League Standings.
 
 == Installation ==
 
-The *AUTOMATED* way:
+**IMPORTANT!**
 
-1. Go to the Plugins->Installed plugins page in WordPress Admin.
-2. Click on Add New.
-3. Search for Game Locations.
-4. Click Install Now.
-5. Activate the plugin.
-6. Use the new Games menu to create and manage your schedules.
+*If you are upgrading, please read the upgrade notes. You shouldn't lose schedule data but you COULD easily lose and changes you've made to the plugin stylesheet.*
 
-The *MANUAL* way:
 
-1. Copy the entire /mstw-game-locations/ directory into your /wp-content/plugins/ directory.
-2. Activate the plugin.
-3. Enter your locations.
-4. Place the shortcode [mstw_gl_table] on the page(s) where you want the locations table to appear. (Be sure to use the editor's HTML tab, not the Visual tab.)
+All the normal installation methods for WordPress plugins work:
+
+1. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Search for Game Locations. Install it.
+2. Download the plugin (.zip file) from WordPress.org. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Click on the Upload link. Find the downloaded .zip file on your computer. Install it.
+3. Download the plugin (.zip file) from WordPress.org. Unzip the file. Upload the extracted plugin folder to your website's wp-content/plugins directory using an FTP client or your hosting provider's file manager app. Activate it on the Plugins->Installed plugins screen in WordPress Admin.
 
 == Frequently Asked Questions ==
 
-= How do I change the look of the locations table? =
-
-In this version, you have to edit the plugin's stylesheet, mstw-gl-styles.css. It is located in game-locations/css. It is short, simple, and well documented. A Settings screen has been added to version 1.1 to control a few elements, especially the map thumbnails in the table. (See the Other Notes section.)
-
-= I don't really like Google Maps. Can I use other mapping service? =
-
-Yes. The custom URL field is provided for that purpose. An entry in that field will override the location's address information. The user will simply be directed to the link in the custom URL field. For example, this field can be used to provide MapQuest maps, or to spruce up Google maps to show driving directions from a particular point and the route outline on the map.
-
-= I use names for locations that sometimes aren't recognized by Google. What should I do? =
-
-Use the custom URL field, then the title will display but won't be used in the Google address.  
-
-= Is this plugin ready for translation? =
-
-Yes. As of version 1.1. Contact me if you would like help creating a translation in your language.
+[The FAQs may be found here.](http://shoalsummitsolutions.com/gl-faq/)
 
 == Screenshots ==
 
 1. All Game Locations
 2. Edit Game Location
-3. Game Location Table
+3. Game Location Table (from shortcode)
 4. The Settings Screen
 
-== Other Notes ==
+== Upgrade Notice ==
 
-The Settings screen on the Admin Dashboard is new in Version 1.1. The settings below provide some control of the Game Locations table and the map icons displayed therein, including:
+The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
 
-* Locations Table Instructions. The instructions that appear at the top of the Game Locations table. Defaults to "Click on map to view driving directions."
-
-* Map marker color. You can select any color for the map marker indicating the location. You must enter a hex value in the format "0xABC123". (Don't ask me why Google Maps doesn't use "#ABC123". Guess I could have translated but hey, just do it!) Note that all six hex charaters are required. The default marker color is blue.
-
-* Map icon width: The width of the map icon in the table in pixels. Google's API limits the value to 640, which would be far too big for the table anyway.
-
-* Map icon height: The height of the map icon in the table in pixels. Google's API limits the value to 640, which would be far too big for the table anyway.
+Upgrading to this version of Game Locations should not impact any existing data, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
 
 
 == Changelog ==
+
+= 1.3 =
+* Cleaned up name space collisions in the admin utils for the MSTW Framework. PREVIOUS VERSIONS WILL NOT WORK WITH THE MSTW FRAMEWORK.
+* Added a tag (mstw_game_locations) to the settings_errors() call to eliminate multiple 'Settings Saved.' messages.
+* Removed (blank) street address line in table if no street address is provided.
+
+= 1.2 =
+* Completed internationalized the admin pages. The default .po and .mo files have been updated and are in the /lang directory.
+* A new "Venue URL" data field was added. It provides a link the the location/venue's web page, NOT MAP, from the venue name, NOT MAP ICON, in the shortcode table.
+* Added the (now standard) display settings to show/hide table columns and related columns/data fields.
+* Map marker color was changed to support only the basic 8 Google Map marker colors. (Don't ask, just live with it.)
+* Many tweaks were made to suppress PHP Notices & Warnings. 
 
 = 1.1 =
 * The plugin was "internationalized". It is now ready for translation and the default .po and .mo files are in the /lang directory.
@@ -98,9 +99,3 @@ The Settings screen on the Admin Dashboard is new in Version 1.1. The settings b
 
 = 0.1 =
 * Initial release.
-
-== Upgrade Notice ==
-
-The current version of Game Locations has been tested on WP 3.5 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
-
-Upgrading to this version of Game Locations should not impact any existing locations. (But backup your DB before you upgrade, just in case. :)
