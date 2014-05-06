@@ -71,6 +71,9 @@ Upgrading to this version of Game Locations should not impact any existing data,
 
 == Changelog ==
 
+= 1.3.1 =
+* Changed action from wp_enque_scripts(??) to wp_enqueue_style to prevent PHP warning.
+
 = 1.3 =
 * Cleaned up name space collisions in the admin utils for the MSTW Framework. PREVIOUS VERSIONS WILL NOT WORK WITH THE MSTW FRAMEWORK.
 * Added a tag (mstw_game_locations) to the settings_errors() call to eliminate multiple 'Settings Saved.' messages.

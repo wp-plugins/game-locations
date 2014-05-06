@@ -126,7 +126,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	//-----------------------------------------------------------------
 	// Queue up the necessary CSS 
 	//
-	add_action( 'wp_enqueue_scripts', 'mstw_gl_enqueue_styles' );
+	add_action( 'wp_enqueue_style', 'mstw_gl_enqueue_styles' );
 
 	function mstw_gl_enqueue_styles ( ) {
 		/* Find the full path to the css file & register the style */
