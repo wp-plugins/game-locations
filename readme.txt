@@ -4,52 +4,21 @@ Donate link: http://shoalsummitsolutions.com
 Tags: maps,locations,driving directions,sports,venues,stadiums,sports venues,sports stadiums 
 Requires at least: 3.3.1
 Tested up to: 3.9
-Stable tag: 1.3
+Stable tag: 1.4
 Text Domain: mstw-loc-domain
 Domain Path: /lang
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provides a table of event venues with automatic links to Google maps. Custom map links can also be created.
+THIS PLUGIN HAS BEEN REPLACED BY MSTW SCHEDULES & SCOREBOARDS.
 
 == Description ==
 
-The MSTW Game Locations plugin is more appropriately named "Event Venues". It creates a table of locations/venues with links to maps for each one. The table is displayed via a simple shortcode, [mstw_gl_table]. Use the Add/Edit Game Location screen to enter the Location (as the title), the street address, city, state, and zip. The plug-in generates the link to that location on Google Maps from the street address, city, state, and zip. A Custom URL can be used to replace the link to Google Maps.
-
-= NEW IN VERSION 1.3 =
-
-Version 1.3 is a maintenance release. Some namespace collisions with other MSTW plugins were eliminated. Please read the release notes for more information.
-
-= Notes =
-
-* The Game Locations plugin is part of the My Sports Team Website (MSTW) framework for sports team and league websites. Others include Game Schedules, Team Rosters, Coaching Staffs, and League Standings, which are all available on [WordPress.org](http://wordpress.org/extend/plugins). [Learn more about MSTW](http://shoalsummitsolutions.com/my-sports-team-website/).
-
-
-= Helpful Links =
-* [**See what the plugin and do for your website on the MSTW Dev Site -»**](http://dev.shoalsummitsolutions.com/)
-* [**Read the user's manual at shoalsummitsolutions.com -»**](http://shoalsummitsolutions.com/category/gl-plugin)
-
-
-**Notes:**
-
-* The references are to "game locations", only because that was original purpose of the plugin. However, perhaps "Event Venue" is a better term, and in fact the plugin works for any type of location - schools, churches, businesses, whatever.
-
-* The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
-
-* The Game Locations plugin is the first in a set of plugins supporting the MSTW Framework for sports team websites. Others currently include Coaching Staffs, Game Schedules, Team Rosters, and League Standings.
+The MSTW Game Locations plugin has been replaced by the [MSTW Schedules & Scoreboards plugin](http://wordpress.org/plugins/mstw-schedules-scoreboards), and is therefore no longer supported. Please install, or upgrade to MSTW Schedules & Scoreboards, which includes all the features of this plugin plus much more. 
 
 == Installation ==
 
-**IMPORTANT!**
-
-*If you are upgrading, please read the upgrade notes. You shouldn't lose schedule data but you COULD easily lose and changes you've made to the plugin stylesheet.*
-
-
-All the normal installation methods for WordPress plugins work:
-
-1. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Search for Game Locations. Install it.
-2. Download the plugin (.zip file) from WordPress.org. Go to the Plugins->Installed plugins screen in Wordpress Admin. Click on Add New. Click on the Upload link. Find the downloaded .zip file on your computer. Install it.
-3. Download the plugin (.zip file) from WordPress.org. Unzip the file. Upload the extracted plugin folder to your website's wp-content/plugins directory using an FTP client or your hosting provider's file manager app. Activate it on the Plugins->Installed plugins screen in WordPress Admin.
+**DO NOT INSTALL THIS PLUGIN. IT IS NO LONGER SUPPORTED. INSTALL [MSTW SCHEDULES & SCOREBOARDS](http://wordpress.org/plugins/mstw-schedules-scoreboards).**
 
 == Frequently Asked Questions ==
 
@@ -64,12 +33,12 @@ All the normal installation methods for WordPress plugins work:
 
 == Upgrade Notice ==
 
-The current version of Game Locations has been tested on WP 3.9 with the Twentyeleven theme. If you use older version of WordPress, good luck! If you are using a newer version, please let me know how the plugin works, especially if you encounter problems.
-
-Upgrading to this version of Game Locations should not impact any existing data, however move any customizations made to the plugin stylesheet - css/mstw-gl-styles.css - because IT WILL BE OVERWRITTEN. (Always backup your WP database before you upgrade, just in case. :)
-
+Do not upgrade this plugin. Install MSTW Game Schedules & Scoreboards, which has replaced it.
 
 == Changelog ==
+
+= 1.4 =
+* Notification of plugin replacement.
 
 = 1.3.1 =
 * Changed action from wp_enque_scripts(??) to wp_enqueue_style to prevent PHP warning.
